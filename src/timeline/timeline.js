@@ -26,7 +26,6 @@ class Timeline {
     isStaggered(time) {
         return false; //todo: implement stagger logic
     }
-
     moveEvent(eventId, newTime) {
         const eventIndex = this.events.findIndex(e => e.id === eventId);
         if (eventIndex === -1) {
@@ -38,6 +37,18 @@ class Timeline {
         for (const dormantEffect of event.dormantEffects) {
             dormantEffect.clearTriggeredEffects(this);
         }
+        
+        // ALSO: Clear any dormant effects on OTHER events that triggered on THIS event
+        for (const otherEvent of this.events) {
+            if (otherEvent.id === eventId) continue;
+            for (const dormantEffect of otherEvent.dormantEffects) {
+                if (dormantEffect.triggeredEvents.has(eventId)) {
+                    dormantEffect.triggeredEvents.delete(eventId);
+                    console.log(`  Cleared ${otherEvent.skill.name}'s dormant effect trigger on ${event.skill.name}`);
+                }
+            }
+        }
+
         this.events.splice(eventIndex, 1);
         event.move(newTime);
         this.updateEvents(event);
@@ -62,7 +73,7 @@ class Timeline {
                 newEvent.checkDormantEffects(event);
             }
             // if an existing event happens later, recalculate it in case of new effects being added
-                event.recalculate(newEvent, activeEffects);
+            event.recalculate(activeEffects);
         }
     }
 

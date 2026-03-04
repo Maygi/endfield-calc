@@ -14,7 +14,6 @@ class SkillEvent {
         this.time = time;
         this.skill = skill;
         this.id = crypto.randomUUID();
-        this.dormantFlag = false; //set to true if this event should check for dormant effects when added to timeline
         console.log(`Created SkillEvent: ${skill.name} at time ${time} with id ${this.id}`);
         this.initialize(time);
         this.calculation = null;
@@ -46,17 +45,17 @@ class SkillEvent {
         this.damage = [];
         this.effects = [];
         this.dormantEffects = [];
-        this.dormantFlag = false; //set to true if this SkillEvent procced any dormant effects
         for (const effect of this.skill.effects || []) {
             if (effect instanceof DormantEffect) {
-                this.dormantEffects.push(effect.createInstance(time, this.skill.owner));
+                this.dormantEffects.push(effect.createInstance(time, this.skill.owner, this.id));
             } else {
-                this.effects.push(effect.createInstance(time, this.skill.owner));
+                this.effects.push(effect.createInstance(time, this.skill.owner, this.id));
             }
         }
 
         this.damage.push(new Damage(time, this.skill));
-        this.recalculate(this);
+        this.recalculate();
+        console.log(`Initialized SkillEvent: ${this.skill.name} at time ${time} with damage ${this.damage.length} and effects ${this.effects.length}`);
     }
 
     /**
@@ -94,7 +93,6 @@ class SkillEvent {
                 if (dormantEffect.shouldTrigger(newEvent)) {
                     let triggeredEffect = dormantEffect.triggerInstance(newEvent);
                     console.log(`Dormant effect triggered by ${newEvent.skill.name}: ${triggeredEffect.constructor.name}`);
-                    newEvent.dormantFlag = true;
                     found = true;
                     if (triggeredEffect instanceof Damage) {
                         newEvent.damage.push(triggeredEffect);
@@ -109,36 +107,35 @@ class SkillEvent {
     }
 
     /**
-     * Recalculates the damage value when new events are added before it.
+     * Recalculates the damage value when new events are added.
      */
-    recalculate(newEvent, activeEffects = null) {
-        if (newEvent.time <= this.time) { // new event happened before - update damage in case of new buffs/debuffs
-            if (activeEffects === null) { // when initialized, just get events up to current time
-                activeEffects = timeline.getEventsUpTo(this.time).flatMap(e => e.effects);
-            }
-            const buffEffects = [];
-            const debuffEffects = [];
-            for (const effect of activeEffects) {
-                if (effect.definition instanceof BuffEffect) {
-                    if (effect.definition.scope === SCOPE.ENEMY) {
-                        debuffEffects.push(effect);
-                    } else {
-                        buffEffects.push(effect);
-                    }
+    recalculate(activeEffects = null) {
+        if (activeEffects === null) { // when initialized, just get events up to current time
+            const eventsUpToNow = timeline.getEventsUpTo(this.time);
+            activeEffects = eventsUpToNow.length > 0 ? eventsUpToNow.flatMap(e => e.effects) : [];
+        }
+        const buffEffects = [];
+        const debuffEffects = [];
+        for (const effect of activeEffects) {
+            if (effect.definition instanceof BuffEffect) {
+                if (effect.definition.scope === SCOPE.ENEMY) {
+                    debuffEffects.push(effect);
+                } else {
+                    buffEffects.push(effect);
                 }
             }
-            const characterStats = this.skill.owner.baseStats;
-            const staggered = timeline.isStaggered(this.time);
-            
-            this.calculation = new Calculation(characterStats, enemyStats, buffEffects, debuffEffects);
-            
-            for (const damageInstance of this.damage) {
-                const damageCalc = this.calculation.calculateDamage(damageInstance.skill, staggered);
-                console.log(damageCalc.toString());
-            }
-
-            console.log(this.calculation.getEffectString())
         }
+        const characterStats = this.skill.owner.baseStats;
+        const staggered = timeline.isStaggered(this.time);
+        
+        this.calculation = new Calculation(characterStats, enemyStats, buffEffects, debuffEffects);
+        
+        for (const damageInstance of this.damage) {
+            const damageCalc = this.calculation.calculateDamage(damageInstance.skill, staggered);
+            console.log(damageCalc.toString());
+        }
+
+        console.log(this.calculation.getEffectString())
     }
 }
 

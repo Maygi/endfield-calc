@@ -13,8 +13,8 @@ class DormantEffect extends Effect {
         this.trigger = trigger;
     }
 
-    createInstance(startTime, owner = null) {
-        return new DormantEffectInstance(this, startTime, owner);
+    createInstance(startTime, owner = null, sourceId = null) {
+        return new DormantEffectInstance(this, startTime, owner, sourceId);
     }
 }
 
@@ -25,11 +25,13 @@ class DormantEffectInstance extends EffectInstance {
     constructor(definition, startTime, owner = null, sourceId = null) {
         super(definition, startTime, owner, sourceId);
         this.triggeredEvents = new Set();
-        console.log(`Created DormantEffectInstance: ${definition.name} from ${startTime} to ${this.endTime} with trigger ${definition.trigger} and sourceId ${sourceId}`);
     }
 
     shouldTrigger(event) {
-        return (event.skill.name === this.definition.trigger || event.skill.type === this.definition.trigger
+        if (this.triggeredEvents.has(event.id)) {
+            return false;
+        } else
+            return (event.skill.name === this.definition.trigger || event.skill.type === this.definition.trigger
             && this.startTime + this.definition.duration <= event.time);
     }
 
@@ -53,11 +55,9 @@ class DormantEffectInstance extends EffectInstance {
      * @param {Timeline} timeline The timeline reference to remove from.
      */
     clearTriggeredEffects(timeline) {
-        console.log(`Clearing triggered effects for DormantEffectInstance ${this.definition.name} with id ${this.sourceId}`);
         for (const eventId of this.triggeredEvents) {
             const event = timeline.events.find(e => e.id === eventId);
             if (event) {
-                // Remove damage/effects that came from this dormant effect
                 event.damage = event.damage.filter(d => d.sourceId !== this.sourceId);
                 event.effects = event.effects.filter(e => e.sourceId !== this.sourceId);
             }

@@ -19,6 +19,13 @@ class Effect {
  * An instance of an Effect on the timeline.
  */
 class EffectInstance {
+    /**
+     * 
+     * @param {Effect} definition The Effect definition object that has the core information.
+     * @param {number} startTime The time that the effect starts on the timeline.
+     * @param {String} owner The string for the Owner of the effect instance.
+     * @param {String} sourceId The UUID of the SkilLEvent that triggered this.
+     */
     constructor(definition, startTime, owner = null, sourceId = null) {
         this.definition = definition;
         this.startTime = startTime;
