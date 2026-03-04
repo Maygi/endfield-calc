@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Combat Timeline</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --panel: #0e1118;
+    --panel2: #131720;
+    --border: #1e2535;
+    --border-bright: #2a3550;
+    --accent: #fffd75;
+    --accent2: #ffffff;
+    --accent3: #69f0ae;
+    --warn: #ffab40;
+    --danger: #ff5252;
+    --text: #c8d6e8;
+    --text-dim: #5a6a80;
+    --text-bright: #eaf2ff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .app {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+    padding: 20px;
+    gap: 16px;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: var(--panel);
+    border: 1px solid var(--border-bright);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+  .header-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .header-title span { color: var(--text-dim); }
+  .header-meta {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    text-align: right;
+    line-height: 1.6;
+  }
+  .header-meta b { color: var(--accent3); }
+
+  /* ─── MAIN ─── */
+  .main {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 16px;
+    min-height: 0;
+  }
+
+  /* ─── ABILITY PANEL ─── */
+  .ability-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+  }
+  .panel-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    flex-shrink: 0;
+  }
+  .character-section { display: flex; flex-direction: column; gap: 6px; }
+  .char-header { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+  .char-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .char-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-bright);
+  }
+  .ability-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    cursor: grab;
+    transition: all 0.15s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .ability-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+  }
+  .ability-item:hover { border-color: var(--border-bright); background: #161d2a; transform: translateX(2px); }
+  .ability-item:active { cursor: grabbing; opacity: 0.7; }
+  .ability-item.dragging { opacity: 0.4; }
+  .ability-icon {
+    width: 28px; height: 28px;
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    flex-shrink: 0;
+    font-family: 'Rajdhani', sans-serif;
+  }
+  .ability-info { flex: 1; min-width: 0; }
+  .ability-name { font-size: 12px; font-weight: 600; color: var(--text-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ability-type { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--text-dim); margin-top: 1px; }
+
+  .type-basic .ability-icon { background: rgba(105,240,174,0.1); color: var(--accent3); }
+  .type-basic::before { background: var(--accent3); }
+  .type-skill .ability-icon { background: rgba(79,195,247,0.1); color: var(--accent); }
+  .type-skill::before { background: var(--accent); }
+  .type-combo .ability-icon { background: rgba(255,171,64,0.1); color: var(--warn); }
+  .type-combo::before { background: var(--warn); }
+  .type-ultimate .ability-icon { background: rgba(224,64,251,0.1); color: var(--accent2); }
+  .type-ultimate::before { background: var(--accent2); }
+  .type-finisher .ability-icon { background: rgba(255,82,82,0.1); color: var(--danger); }
+  .type-finisher::before { background: var(--danger); }
+
+  /* ─── TIMELINE PANEL ─── */
+  .timeline-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+  }
+  .timeline-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel2);
+    flex-shrink: 0;
+  }
+  .timeline-controls { display: flex; align-items: center; gap: 12px; }
+  .tl-label { font-family: 'Rajdhani', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); }
+  .tl-stat {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--accent3);
+    padding: 2px 8px;
+    background: rgba(105,240,174,0.05);
+    border: 1px solid rgba(105,240,174,0.15);
+    border-radius: 2px;
+  }
+  .btn-clear {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: var(--text-dim);
+    background: none;
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-clear:hover { color: var(--danger); border-color: var(--danger); background: rgba(255,82,82,0.05); }
+
+  #timeline-scroll {
+    flex: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
+    cursor: default;
+  }
+
+  /* Custom scrollbar for timeline */
+  #timeline-scroll::-webkit-scrollbar { height: 5px; }
+  #timeline-scroll::-webkit-scrollbar-track { background: var(--panel2); }
+  #timeline-scroll::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 3px; }
+  #timeline-scroll::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  .timeline-inner { position: relative; min-height: 200px; padding: 16px 20px 20px; }
+
+  .time-ruler { position: relative; height: 24px; margin-bottom: 12px; }
+  .ruler-track { position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--border-bright); }
+  .ruler-tick { position: absolute; top: 0; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .ruler-tick-line { width: 1px; height: 8px; background: var(--border-bright); }
+  .ruler-tick-label { font-family: 'Share Tech Mono', monospace; font-size: 9px; color: var(--text-dim); margin-top: 10px; white-space: nowrap; }
+
+  .drop-lane {
+    position: relative;
+    height: 54px;
+    margin-bottom: 8px;
+    background: rgba(255,255,255,0.01);
+    border: 1px dashed var(--border);
+    border-radius: 3px;
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  }
+  .drop-lane.drag-over {
+    border-color: var(--accent);
+    background: rgba(79,195,247,0.04);
+    box-shadow: 0 0 12px rgba(79,195,247,0.1) inset;
+  }
+  .lane-label {
+    position: absolute;
+    left: 8px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .tl-event {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 42px;
+    min-width: 88px;
+    padding: 0 10px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    transition: filter 0.15s, transform 0.15s;
+    border: 1px solid;
+    z-index: 2;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .tl-event:hover { transform: translate(-50%, -50%) translateY(-2px); filter: brightness(1.25); }
+  .tl-event:active { cursor: grab; }
+  .tl-event.dragging-tl { opacity: 0.4; transform: translate(-50%, -50%) scale(0.95); }
+
+  .tl-event-icon { width: 22px; height: 22px; border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-family: 'Rajdhani', sans-serif; font-weight: 700; flex-shrink: 0; }
+  .tl-event-name { font-size: 11px; font-weight: 600; line-height: 1.2; color: var(--text-bright); }
+  .tl-event-dmg { font-family: 'Share Tech Mono', monospace; font-size: 10px; margin-top: 1px; }
+
+  .tl-type-basic { background: rgba(105,240,174,0.07); border-color: rgba(105,240,174,0.3); }
+  .tl-type-basic .tl-event-icon { background: rgba(105,240,174,0.15); color: var(--accent3); }
+  .tl-type-basic .tl-event-dmg { color: var(--accent3); }
+  .tl-type-skill { background: rgba(79,195,247,0.07); border-color: rgba(79,195,247,0.3); }
+  .tl-type-skill .tl-event-icon { background: rgba(79,195,247,0.15); color: var(--accent); }
+  .tl-type-skill .tl-event-dmg { color: var(--accent); }
+  .tl-type-combo { background: rgba(255,171,64,0.07); border-color: rgba(255,171,64,0.3); }
+  .tl-type-combo .tl-event-icon { background: rgba(255,171,64,0.15); color: var(--warn); }
+  .tl-type-combo .tl-event-dmg { color: var(--warn); }
+  .tl-type-ultimate { background: rgba(224,64,251,0.07); border-color: rgba(224,64,251,0.3); }
+  .tl-type-ultimate .tl-event-icon { background: rgba(224,64,251,0.15); color: var(--accent2); }
+  .tl-type-ultimate .tl-event-dmg { color: var(--accent2); }
+  .tl-type-finisher { background: rgba(255,82,82,0.07); border-color: rgba(255,82,82,0.3); }
+  .tl-type-finisher .tl-event-icon { background: rgba(255,82,82,0.15); color: var(--danger); }
+  .tl-type-finisher .tl-event-dmg { color: var(--danger); }
+
+  .drop-ghost {
+    position: absolute;
+    top: 50%; transform: translate(-50%, -50%);
+    height: 42px; min-width: 60px;
+    padding: 0 10px;
+    border-radius: 3px;
+    border: 1px dashed var(--accent);
+    background: rgba(79,195,247,0.05);
+    pointer-events: none;
+    z-index: 1;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .drop-ghost.visible { display: flex; }
+  .drop-ghost-label { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--accent); opacity: 0.7; }
+
+  .empty-timeline {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 8px;
+    pointer-events: none;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .empty-timeline.visible { opacity: 1; }
+  .empty-timeline-text { font-family: 'Rajdhani', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); }
+  .empty-timeline-sub { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--border-bright); }
+
+  /* ─── TOOLTIP ─── */
+  .tooltip {
+    position: fixed;
+    z-index: 1000;
+    width: 430px;
+    max-height: 72vh;
+    overflow-y: auto;
+    background: var(--panel);
+    border: 1px solid var(--border-bright);
+    border-radius: 4px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(79,195,247,0.1);
+  }
+  .tooltip.visible { opacity: 1; }
+  .tooltip::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 4px 4px 0 0;
+  }
+  .tt-header { padding: 12px 14px 10px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+  .tt-icon { width: 32px; height: 32px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-family: 'Rajdhani', sans-serif; font-weight: 700; flex-shrink: 0; }
+  .tt-title { flex: 1; }
+  .tt-name { font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-bright); letter-spacing: 1px; }
+  .tt-meta { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+  .tt-total-dmg { font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 700; text-align: right; }
+
+  .tt-section { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  .tt-section:last-child { border-bottom: none; }
+  .tt-section-label { font-family: 'Rajdhani', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; }
+
+  .tt-buffs { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tt-buff-tag { font-family: 'Share Tech Mono', monospace; font-size: 9px; padding: 2px 6px; border-radius: 2px; background: rgba(79,195,247,0.08); border: 1px solid rgba(79,195,247,0.2); color: var(--accent); }
+  .tt-buff-tag.debuff { background: rgba(255,82,82,0.08); border-color: rgba(255,82,82,0.2); color: var(--danger); }
+  .tt-buff-tag.no-buff { color: var(--text-dim); background: none; border-color: var(--border); }
+
+  .tt-calc-block { background: var(--panel2); border: 1px solid var(--border); border-radius: 3px; padding: 8px 10px; margin-bottom: 8px; }
+  .tt-calc-block:last-child { margin-bottom: 0; }
+  .tt-calc-title { font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--text-bright); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+  .tt-calc-dmg { font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 700; }
+
+  .tt-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 12px; }
+  .tt-row { display: flex; justify-content: space-between; align-items: center; padding: 2px 0; }
+  .tt-row-label { font-family: 'Share Tech Mono', monospace; font-size: 9px; color: var(--text-dim); }
+  .tt-row-value { font-family: 'Share Tech Mono', monospace; font-size: 9px; color: var(--text); }
+  .tt-row-value.highlight { color: var(--accent3); }
+  .tt-row-value.warn { color: var(--warn); }
+
+  .tt-formula { font-family: 'Share Tech Mono', monospace; font-size: 9px; color: var(--text-dim); line-height: 1.8; padding: 6px 8px; background: rgba(0,0,0,0.3); border-radius: 2px; margin-top: 6px; }
+  .tt-formula span { color: var(--accent3); }
+
+  /* ─── STATUS BAR ─── */
+  .status-bar { background: var(--panel); border: 1px solid var(--border); border-radius: 4px; padding: 8px 16px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .status-item { display: flex; align-items: center; gap: 6px; }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent3); animation: pulse-dot 2s infinite; }
+  @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .status-text { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--text-dim); }
+  .status-text b { color: var(--text); }
+  .status-sep { width: 1px; height: 14px; background: var(--border-bright); }
+
+  /* ─── POPUPS ─── */
+  .time-input-popup {
+    position: fixed; z-index: 900;
+    background: var(--panel);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    padding: 12px 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    display: none;
+  }
+  .time-input-popup.visible { display: block; }
+  .time-input-label { font-family: 'Rajdhani', sans-serif; font-size: 11px; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 6px; }
+  .time-input-row { display: flex; gap: 6px; align-items: center; }
+  .time-input-field { width: 70px; background: var(--panel2); border: 1px solid var(--border-bright); color: var(--text-bright); font-family: 'Share Tech Mono', monospace; font-size: 14px; padding: 4px 8px; border-radius: 2px; outline: none; }
+  .time-input-field:focus { border-color: var(--accent); }
+  .time-confirm-btn { font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--bg); background: var(--accent); border: none; padding: 5px 12px; border-radius: 2px; cursor: pointer; }
+  .time-cancel-btn { font-family: 'Rajdhani', sans-serif; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim); background: none; border: 1px solid var(--border); padding: 4px 10px; border-radius: 2px; cursor: pointer; }
+  .time-cancel-btn:hover { border-color: var(--danger); color: var(--danger); }
+
+  .ctx-menu { position: fixed; z-index: 1100; background: var(--panel); border: 1px solid var(--border-bright); border-radius: 3px; overflow: hidden; display: none; box-shadow: 0 4px 16px rgba(0,0,0,0.5); min-width: 130px; }
+  .ctx-menu.visible { display: block; }
+  .ctx-item { padding: 8px 14px; font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; cursor: pointer; color: var(--text); transition: background 0.1s; display: flex; align-items: center; gap: 8px; }
+  .ctx-item:hover { background: rgba(255,255,255,0.05); }
+  .ctx-item.danger { color: var(--danger); }
+  .ctx-item.danger:hover { background: rgba(255,82,82,0.08); }
+
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: var(--panel2); }
+  ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header>
+    <div class="header-title">Combat <span>/</span> Timeline</div>
+    <div class="header-meta">
+      ENEMY: <b id="enemy-name">Boss</b> &nbsp;
+      DEF: <b id="enemy-def">—</b> &nbsp;
+      HP: <b id="enemy-hp">—</b>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="ability-panel">
+      <div class="panel-label">Abilities</div>
+      <div id="char-list"></div>
+    </div>
+
+    <div class="timeline-panel">
+      <div class="timeline-header">
+        <span class="tl-label">Timeline</span>
+        <div class="timeline-controls">
+          <span class="tl-stat" id="total-dmg-stat">TOTAL: 0</span>
+          <span class="tl-stat" id="event-count-stat">0 EVENTS</span>
+          <button class="btn-clear" id="btn-clear">CLEAR</button>
+        </div>
+      </div>
+      <div id="timeline-scroll">
+        <div class="timeline-inner" id="timeline-inner">
+          <div class="time-ruler" id="time-ruler"></div>
+          <div id="drop-lanes"></div>
+          <div class="empty-timeline visible" id="empty-msg">
+            <div class="empty-timeline-text">Timeline Empty</div>
+            <div class="empty-timeline-sub">Drag abilities here to begin</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="status-bar">
+    <div class="status-item"><div class="status-dot"></div><div class="status-text">LIVE</div></div>
+    <div class="status-sep"></div>
+    <div class="status-item"><div class="status-text">Events: <b id="sb-events">0</b></div></div>
+    <div class="status-sep"></div>
+    <div class="status-item"><div class="status-text">Total DMG: <b id="sb-dmg">0</b></div></div>
+    <div class="status-sep"></div>
+    <div class="status-item"><div class="status-text">Length: <b id="sb-length">0s</b></div></div>
+    <div class="status-sep"></div>
+    <div class="status-item"><div class="status-text">Drag abilities onto the timeline · Hover for breakdown · Right-click to edit</div></div>
+  </div>
+
+</div>
+
+<!-- Tooltip -->
+<div class="tooltip" id="tooltip"></div>
+
+<!-- Move popup -->
+<div class="time-input-popup" id="time-popup">
+  <div class="time-input-label">MOVE TO TIME (s)</div>
+  <div class="time-input-row">
+    <input class="time-input-field" type="number" id="time-input" min="0" step="0.5" value="1">
+    <button class="time-confirm-btn" id="btn-confirm-time">SET</button>
+    <button class="time-cancel-btn" id="btn-cancel-time">✕</button>
+  </div>
+</div>
+
+<!-- Context menu -->
+<div class="ctx-menu" id="ctx-menu">
+  <div class="ctx-item" id="ctx-move">⧖ Move</div>
+  <div class="ctx-item danger" id="ctx-remove">✕ Remove</div>
+</div>
+
+<script type="module" src="../src/ui.js"></script>
+</html>
