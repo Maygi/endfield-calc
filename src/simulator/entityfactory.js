@@ -2,7 +2,7 @@ import { CHARACTER_INDEX } from '../data/characters/index.js';
 
 /**
  * Instantiates a character Entity using the stored data if a valid name is given.
- * @param {string} charName Name of character as listed in the index.
+ * @param {string} charId Name of character as listed in the index.
  */
 function createCharacter(charName) {
     const kit = CHARACTER_INDEX[charName];
@@ -11,8 +11,8 @@ function createCharacter(charName) {
     const character = new Entity(charName);
     
     character.addComponent('Stats', new StatsComponent(kit.baseStats));
-    character.addComponent('Skills', new StatsComponent(kit.skills));
-    character.addComponent('Triggers', new StatsComponent(kit.triggers));
+    character.addComponent('Skills', new AbilityComponent(kit.skills));
+    character.addComponent('Triggers', new TriggerComponent(kit.triggers));
 
     return character;
 }

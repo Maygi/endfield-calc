@@ -44,8 +44,8 @@ export default class Engine {
         // TODO: read the event type and dispatch to relevant handlers. hit events, buff application, expiry, etc.
 
         // For example, to resolve a hit event we might do something like this
-        const source = state.entities.get(event.sourceID);
-        const target = state.entities.get(event.targetID);
+        const source = state.entities.get(event.sourceId);
+        const target = state.entities.get(event.targetId);
 
         const receipt = Calculator.calculateHit(source, target, event.data);
         // etc, broadcasting relevant informaton, logging, all that

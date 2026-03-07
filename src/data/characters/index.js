@@ -1,6 +1,6 @@
-import { CHARACTER } from './[character].js';
+import { Endministrator } from "./endministrator.js";
 
 export const CHARACTER_INDEX = {
-    character: [CHARACTER],
+    ENDMINISTRATOR: Endministrator,
     // etc. one for each character
 };

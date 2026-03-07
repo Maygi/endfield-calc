@@ -3,6 +3,7 @@ import EventQueue from "./eventqueue.js";
 export default class CombatState {
     constructor() {
         this.currentTime = 0;
+        this.sp = 200;
         this.eventQueue = new EventQueue();
 
         /** @type {Map<string, Entity>} */

@@ -2,8 +2,11 @@
  * Generic container for an actor in the simulation (playable character, enemy or otherwise).
  */
 class Entity {    
-    constructor(name) {
+    constructor(instanceId, charId, name, team) {
+        this.instanceId = instanceId;
+        this.charId = charId;
         this.name = name;
+        
         this.components = new Map();
     }
 
