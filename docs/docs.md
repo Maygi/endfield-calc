@@ -38,7 +38,8 @@ Each entity contains one or more Components. An exhaustive list of Components is
 - Status
   - Applies and manages all status effects on the entity, timed and infinite.
   - Exceptions: Arts Inflictions and Physical Statuses. These have their dedicated components.
-  - Responsible for scheduling events for statuses expiring, damage due to statuses (including DoT effects), and broadcasting to statuses.
+  - Responsible for scheduling events for statuses expiring and tick effects due to statuses (including DoT effects).
+  - Listens for statuses' trigger conditions (by subscribing to the relevant channel in the Engine) and executes their effects.
 - Infliction
   - Responsible for tracking and managing Arts Inflictions applied to the entity.
   - References the `arts.js` data file for the required event to return.
