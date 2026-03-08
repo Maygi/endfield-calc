@@ -3,6 +3,12 @@ import { ABILITY_TYPE, BUFF_TYPE, ELEMENT, EVENT_TYPE, PHYSICAL_STATUS } from ".
 /**
  * Simulation events processed by the Engine during simulation.
  * The only event added by user input is SkillEvent. Every other event is internally generated as intermediaries.
+ * Every event contains the following fields:
+ * - time and priority for sorting in the EventQueue
+ * - the IDs of the source and target of the event
+ * - a data field containing relevant information used in calculations/processing. every subfield here must be filled (and can be assumed to exist).
+ * - a tags field to allow for specific event checking. there is currently no exhaustive list of tags, just use as needed. optional.
+ * - a metadata field for logging purposes. optional.
  */
 class SimEvent {
     /**
@@ -10,14 +16,20 @@ class SimEvent {
      * @param {number} priority Used to break ties in case of identical time values. The smaller the value, the greater its priority.
      * @param {string} sourceId 
      * @param {string} targetId 
+     * @param {Object} optionalData
+     * @param {Object} tags
+     * @param {Object} metadata
      */
-    constructor(time, priority, sourceId, targetId) {
+    constructor(time, priority, sourceId, targetId, optionalData, tags, metadata) {
         this.time = time;
         this.priority = priority;
         this.type = null;
         this.sourceId = sourceId;
         this.targetId = targetId;
-        this.data = null; // every event will have its payload enclosed in a data field
+        this.data = null; // payload. all subfields must exist and be valid.
+        this.optionalData = optionalData;
+        this.tags = tags; // for trigger checking. optional.
+        this.metadata = metadata; // for logging. optional.
     }
 }
 /**
@@ -29,16 +41,18 @@ export class HitEvent extends SimEvent {
      * @param {number} priority 
      * @param {string} sourceId 
      * @param {string} targetId 
+     * @param {ABILITY_TYPE | string} hitType
      * @param {number} mv 
      * @param {ELEMENT} element 
      * @param {number} stagger 
-     * @param {ABILITY_TYPE} hitType 
-     * @param {number} hitIndex optional metadata: which hit in the sequence is this?
+     * @param {Object} optionalData
+     * @param {Object} tags
+     * @param {Object} metadata
      */
-    constructor(time, priority, sourceId, targetId, mv, element, stagger, hitType, hitIndex) {
-        super(time, priority, sourceId, targetId);
+    constructor(time, priority, sourceId, targetId, hitType, mv, element, stagger, optionalData, tags, metadata) {
+        super(time, priority, sourceId, targetId, optionalData, tags, metadata);
         this.type = EVENT_TYPE.HIT;
-        this.data = { mv, element, stagger, hitType, hitIndex };
+        this.data = { hitType, mv, element, stagger };
     }
 }
 
@@ -52,9 +66,12 @@ export class InflictionEvent extends SimEvent {
      * @param {string} sourceId 
      * @param {string} targetId 
      * @param {ELEMENT} element The element being inflicted
+     * @param {Object} optionalData
+     * @param {Object} tags
+     * @param {Object} metadata
      */
-    constructor(time, priority, sourceId, targetId, element) {
-        super(time, priority, sourceId, targetId);
+    constructor(time, priority, sourceId, targetId, element, optionalData, tags, metadata) {
+        super(time, priority, sourceId, targetId, optionalData, tags, metadata);
         this.type = EVENT_TYPE.ARTS_INFLICTION;
         this.data = { element };
     }
@@ -70,9 +87,12 @@ export class PhysicalEvent extends SimEvent {
      * @param {string} sourceId 
      * @param {string} targetId 
      * @param {PHYSICAL_STATUS} type 
+     * @param {Object} optionalData
+     * @param {Object} tags
+     * @param {Object} metadata
      */
-    constructor(time, priority, sourceId, targetId, type) {
-        super(time, priority, sourceId, targetId);
+    constructor(time, priority, sourceId, targetId, type, optionalData, tags, metadata) {
+        super(time, priority, sourceId, targetId, optionalData, tags, metadata);
         this.type = EVENT_TYPE.PHYSICAL_APPLICATION;
         this.data = { type };
     }
@@ -81,7 +101,7 @@ export class PhysicalEvent extends SimEvent {
 /**
  * An instance of a status effect being applied. Does not matter if it is a buff, debuff or neutral.
  */
-export class ApplyStatus extends SimEvent {
+export class ApplyStatusEvent extends SimEvent {
     /**
      * @param {number} time 
      * @param {number} priority 
@@ -90,11 +110,14 @@ export class ApplyStatus extends SimEvent {
      * @param {string} statusId 
      * @param {number} duration 
      * @param {number} value 
-     * @param {BUFF_TYPE} type 
+     * @param {BUFF_TYPE | string} type 
      * @param {*} subtype 
+     * @param {Object} optionalData
+     * @param {Object} tags
+     * @param {Object} metadata
      */
-    constructor(time, priority, sourceId, targetId, statusId, duration, value, type, subtype) {
-        super(time, priority, sourceId, targetId);
+    constructor(time, priority, sourceId, targetId, statusId, duration, value, type, subtype, optionalData, tags, metadata) {
+        super(time, priority, sourceId, targetId, optionalData, tags, metadata);
         this.type = EVENT_TYPE.STATUS_APPLICATION;
         this.data = { statusId, duration, value, type, subtype };
     }
@@ -104,11 +127,45 @@ export class ApplyStatus extends SimEvent {
  * A buff ending.
  * * Strictly generated by StatusComponents only, upon application of a buff.
  */
-export class EndStatus extends SimEvent {
-    constructor(time, priority, sourceId, targetId, statusId, type, subtype) {
-        super(time, priority, sourceId, targetId);
+export class EndStatusEvent extends SimEvent {
+    /**
+     * @param {number} time 
+     * @param {number} priority 
+     * @param {string} sourceId 
+     * @param {string} targetId 
+     * @param {string} statusId 
+     * @param {boolean} isValid The StatusComponent may use this to invalidate certain packets (e.g. if an effect is purged or extended)
+     * @param {BUFF_TYPE} type 
+     * @param {*} subtype 
+     * @param {Object} optionalData
+     * @param {Object} tags
+     * @param {Object} metadata
+     */
+    constructor(time, priority, sourceId, targetId, statusId, isValid, type, subtype, optionalData, tags, metadata) {
+        super(time, priority, sourceId, targetId, optionalData, tags, metadata);
         this.type = EVENT_TYPE.STATUS_EXPIRATION;
-        this.data = { type, subtype };
+        this.data = { isValid, type, subtype };
+    }
+}
+
+/**
+ * Used to support discrete ticking status effects.
+ */
+export class StatusTickEvent extends SimEvent {
+    /**
+     * @param {number} time 
+     * @param {number} priority 
+     * @param {string} sourceId 
+     * @param {string} targetId 
+     * @param {string} statusId 
+     * @param {Object} optionalData
+     * @param {Object} tags
+     * @param {Object} metadata
+     */
+    constructor(time, priority, sourceId, targetId, statusId, optionalData, tags, metadata) {
+        super(time, priority, sourceId, targetId, optionalData, tags, metadata);
+        this.type = EVENT_TYPE.STATUS_TICK;
+        this.data = { statusId };
     }
 }
 
@@ -122,9 +179,12 @@ export class SkillEvent extends SimEvent {
      * @param {string} sourceId 
      * @param {string} targetId 
      * @param {ABILITY_TYPE} type 
+     * @param {Object} optionalData
+     * @param {Object} tags
+     * @param {Object} metadata
      */
-    constructor(time, priority, sourceId, targetId, type) {
-        super(time, priority, sourceId, targetId);
+    constructor(time, priority, sourceId, targetId, type, optionalData, tags, metadata) {
+        super(time, priority, sourceId, targetId, optionalData, tags, metadata);
         this.type = EVENT_TYPE.SKILL_EVENT;
         this.data = { type };
     }
@@ -133,7 +193,7 @@ export class SkillEvent extends SimEvent {
 /**
  * Used when a change needs to be made to something in the combat state.
  */
-export class StateUpdate extends SimEvent {
+export class StateUpdateEvent extends SimEvent {
     /**
      * @param {number} time 
      * @param {number} priority 
@@ -141,9 +201,12 @@ export class StateUpdate extends SimEvent {
      * @param {string} targetId 
      * @param {string} property 
      * @param {number} value 
+     * @param {Object} optionalData
+     * @param {Object} tags
+     * @param {Object} metadata
      */
-    constructor(time, priority, sourceId, targetId, property, value) {
-        super(time, priority, sourceId, targetId);
+    constructor(time, priority, sourceId, targetId, property, value, optionalData, tags, metadata) {
+        super(time, priority, sourceId, targetId, optionalData, tags, metadata);
         this.type = EVENT_TYPE.STATE_UPDATE;
         this.data = { property, value };
     }
