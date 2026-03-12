@@ -16,13 +16,13 @@ class Entity {
     }
 
     getComponent(type) {
-        this.components.get(type);
+        return this.components.get(type);
     }
 
     clone(newEngine) {
         const copy = new Entity(newEngine, this.instanceId, this.charId, this.name, this.team);
         for (const [type, component] of this.components) {
-            copy.addComponent(this.name, component.clone(newEngine));
+            copy.addComponent(type, component.clone(newEngine));
         }
         return copy;
     }

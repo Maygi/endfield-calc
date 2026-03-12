@@ -1,13 +1,10 @@
 import { EVENT_TYPE } from "../data/constants";
 import { Calculator } from "./calculation";
 import CombatState from "./combatstate";
-import { Registry } from "./registry";
 
 export default class Engine {
     constructor(state) {
         this.state = state;
-        this.registry = new Registry();
-        this.subscriptions = new Map();
     }
 
     /**
@@ -87,7 +84,7 @@ export default class Engine {
                 break;
 
             case EVENT_TYPE.SKILL_EVENT:
-                target?.getComponent('Ability')?.handleEvent(state, event);
+                target?.getComponent('Skills')?.handleEvent(state, event);
                 break;
 
             case EVENT_TYPE.STATE_UPDATE:
@@ -105,7 +102,7 @@ export default class Engine {
         for (const address of subscribers) {
             const [entityId, componentType] = address.split(':');
             const entity = state.entities.get(entityId);
-            const component = entity?.components.get(componentType);
+            const component = entity?.getComponent(componentType);
 
             if (component?.notify) {
                 component.notify(state, event);

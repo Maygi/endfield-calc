@@ -4,6 +4,7 @@ export default class CombatState {
     constructor() {
         this.currentTime = 0;
         this.sp = 200;
+        this.maxSP = 300;
         this.eventQueue = new EventQueue();
 
         /** @type {Map<string, Entity>} */
@@ -13,10 +14,35 @@ export default class CombatState {
         this.subscriptions = new Map();
     }
 
+    getEntity(entityId) {
+        return this.entities.get(entityId);
+    }
+
+    getEntitiesByTeam(teamType) {
+        const result = [];
+        for (const entity of this.entities.values()) {
+            if (entity.team === teamType) result.push(entity);
+        }
+        return result;
+    }
+
+    getSP() {
+        return this.sp;
+    }
+
+    modifySP(delta) {
+        this.sp = Math.max(0, Math.min(this.maxSP, this.sp + delta));
+    }
+
     handleStateUpdate(event) {
+        if (event.data.property === 'SP') {
+            this.modifySP(event.data.value);
+            return;
+        }
+
         const target = this.entities.get(event.targetId);
-        if (target?.stats) {
-            target.stats.handleEvent(this, event);
+        if (target?.getComponent('Stats')) {
+            target?.getComponent('Stats').handleEvent(this, event);
         }
     }
 

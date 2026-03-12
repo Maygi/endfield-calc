@@ -2,6 +2,7 @@ import { EVENT_TYPE } from "../data/constants";
 import CombatState from "../simulator/combatstate";
 import Engine from "../simulator/engine";
 import { EndStatusEvent } from "../simulator/events";
+import { Registry } from "../simulator/registry";
 export class StatusComponent {
     // for ID assignment
     #statusCounter = 0;
@@ -44,7 +45,7 @@ export class StatusComponent {
 
     applyStatus(event, statusKey) {
         const data = event.data;
-        const def = this.engine.registry.getStatusDefinition(data.namespace, data.statusName);
+        const def = Registry.getStatusDefinition(data.namespace, data.statusName);
         if (!def) return;
 
         let duration = Infinity;
@@ -89,7 +90,7 @@ export class StatusComponent {
 
     refreshStatus(instance, event) {
         const data = event.data;
-        const def = this.engine.registry.getStatusDefinition(instance.namespace, instance.statusName);
+        const def =  Registry.getStatusDefinition(instance.namespace, instance.statusName);
         if (!def) return;
 
         if (event.optionalData?.level) {
@@ -135,7 +136,7 @@ export class StatusComponent {
         const instance = this.statusById.get(event.data.statusId);
         if (!instance) return;
 
-        const def = this.engine.registry.getStatusDefinition(instance.namespace, instance.statusName);
+        const def = Registry.getStatusDefinition(instance.namespace, instance.statusName);
 
         if (def?.onTick) {
             this.executeAndPush(def.onTick, instance, event, def);
@@ -155,7 +156,7 @@ export class StatusComponent {
         this.statusByKey.delete(instance.statusKey);
         this.statusById.delete(instance.instanceId);
 
-        const def = this.engine.registry.getStatusDefinition(instance.namespace, instance.statusName);
+        const def = Registry.getStatusDefinition(instance.namespace, instance.statusName);
         if (def?.onRemove) {
             this.executeAndPush(def.onRemove, instance, event, def);
         }
@@ -182,7 +183,7 @@ export class StatusComponent {
             const instance = this.statusById.get(instanceId);
             if (!instance) continue;
 
-            const def = this.engine.registry.getStatusDefinition(instance.namespace, instance.statusName);
+            const def = Registry.getStatusDefinition(instance.namespace, instance.statusName);
             if (!def || !def.triggers || !def.triggers[event.type]) continue;
 
             const effects = def.triggers[event.type](state, instance, event, def);

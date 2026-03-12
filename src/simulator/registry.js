@@ -1,27 +1,19 @@
-export class Registry {
-    constructor() {
-        this.statusDefinitions = new Map();
+import { CHARACTER_INDEX } from "../data/characters";
+import { PHYSICAL_STATUSES } from "../data/physical"
 
-        this.initalize();
-    }
-
-    initialize() {
-        
-    }
-
+export const Registry = {
     getStatusDefinition(namespace, statusName) {
-        const namespaceData = this.statusDefinitions.get(namespace);
-        if (!namespaceData) {
-            console.warn(`Registry error: Namespace ${namespace} not found.`);
-            return null;
+        if (namespace === 'PHYSICAL') {
+            return PHYSICAL_STATUSES[statusName];
+        }
+        if (namespace === 'ARTS') {
+            return; // actually i dont think i use this hmm
+        }
+        if (CHARACTER_INDEX[namespace] && CHARACTER_INDEX[namespace].statuses) {
+            return CHARACTER_INDEX[namespace].statuses[statusName];
         }
 
-        const definition = namespaceData[statusName];
-        if (!definition) {
-            console.warn(`Registry error: Status ${statusName} not found in namespace ${namespace}.`);
-            return null;
-        }
-
-        return definition;
+        console.warn(`Status ${statusName} not found in namespace ${namespace}`);
+        return null;
     }
 }
