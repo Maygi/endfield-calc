@@ -13,16 +13,28 @@ export default class CombatState {
         this.subscriptions = new Map();
     }
 
-    clone() {
+    handleStateUpdate(event) {
+        const target = this.entities.get(event.targetId);
+        if (target?.stats) {
+            target.stats.handleEvent(this, event);
+        }
+    }
+
+    clone(newEngine) {
         const copy = new CombatState();
         copy.currentTime = this.currentTime;
+        copy.sp = this.sp;
+
         copy.eventQueue = this.eventQueue.clone();
+
         for (const [id, entity] of this.entities) {
-            copy.entities.set(id, entity.clone());
+            copy.entities.set(id, entity.clone(newEngine));
         }
+
         for (const [type, listeners] of this.subscriptions) {
             copy.subscriptions.set(type, new Set(listeners))
         }
+        
         return copy;
     }
 }

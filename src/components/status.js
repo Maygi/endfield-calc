@@ -228,8 +228,8 @@ export class StatusComponent {
         }
     }
 
-    clone() {
-        const copy = new StatusComponent(this.engine, this.entityId);
+    clone(newEngine) {
+        const copy = new StatusComponent(newEngine, this.entityId);
         copy.#statusCounter = this.#statusCounter;
         const instanceMapping = new Map();
         for (const [id, instance] of this.statusById) {

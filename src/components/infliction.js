@@ -11,12 +11,6 @@ export default class InflictionComponent {
         this.stacks = stacks;
     }
 
-    notify(state, event) {
-        if (event.type === EVENT_TYPE.ARTS_INFLICTION && event.targetId === this.entityId) {
-            this.applyElement(event.data.element, state, event);
-        }
-    }
-
     applyElement(element, state, event) {
         // if target has no current element
         if (!this.currentElement) {
@@ -99,7 +93,7 @@ export default class InflictionComponent {
         this.engine.pushEvent(applyDebuff);
     }
 
-    clone() {
-        return new InflictionComponent(this.engine, this.entityId, this.currentElement, this.stacks);
+    clone(newEngine) {
+        return new InflictionComponent(newEngine, this.entityId, this.currentElement, this.stacks);
     }
 }

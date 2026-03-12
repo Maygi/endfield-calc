@@ -8,12 +8,6 @@ export default class PhysicalComponent {
         this.stacks = stacks;
     }
 
-    notify(state, event) {
-        if (event.type === EVENT_TYPE.PHYSICAL_APPLICATION && event.targetId === this.entityId) {
-            this.handleApplication(state, event);
-        }
-    }
-
     handleApplication(state, event) {
         const type = event.data.type; // is a PHYSICAL_STATUS
         const isForced = event.optionalData?.isForced || false;
@@ -25,9 +19,6 @@ export default class PhysicalComponent {
         // if there are currently no Vuln stacks
         if (currStacks === 0) {
             this.stacks = 1;
-
-            // optionally consider applying Vuln as a status? might allow easier UI tracking
-
             if (!isForced) return;
         }
 
@@ -55,7 +46,7 @@ export default class PhysicalComponent {
         ))
     }
 
-    clone() {
-        return new PhysicalComponent(this.engine, this.entityId, this.stacks);
+    clone(newEngine) {
+        return new PhysicalComponent(newEngine, this.entityId, this.stacks);
     }
 }

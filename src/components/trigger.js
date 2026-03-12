@@ -33,7 +33,7 @@ export class TriggerComponent {
         }
     }
 
-    clone() {
-        return new TriggerComponent(this.engine, this.entityId, this.triggers);
+    clone(newEngine) {
+        return new TriggerComponent(newEngine, this.entityId, this.triggers);
     }
 }

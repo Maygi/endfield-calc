@@ -11,11 +11,25 @@ export default class Engine {
     }
 
     /**
+     * Adds a event to the state's queue. Used by components to inject new events.
+     * @param {SimEvent} event 
+     */
+    pushEvent(event) {
+        // UI hooks go here
+
+        if (event.time < this.state.currentTime) {
+            console.error(`Cannot push event into the past!`);
+        }
+
+        this.state.eventQueue.push(event);
+    }
+
+    /**
      * Runs the simulation beginning at a particular combat state, up till a specified endTime.
      * @param {CombatState} state
      * @param {*} endTime Cannot be less than the currentTime of the state.
      */
-    static simulateTo(state, endTime) {
+    simulateTo(state, endTime) {
         while (!state.eventQueue.isEmpty() && state.eventQueue.peek().time <= endTime) {
             const event = state.eventQueue.pop();
             const delta = event.time - state.currentTime;
@@ -31,7 +45,7 @@ export default class Engine {
      * @param {CombatState} state 
      * @param {*} time 
      */
-    static advanceTime(state, time) {
+    advanceTime(state, time) {
         if (time <= 0) return;
         state.entities.forEach(entity => {
             entity.components.forEach(component => {
@@ -46,22 +60,42 @@ export default class Engine {
      * @param {CombatState} state 
      * @param {*} event 
      */
-    static processEvent(state, event) {
+    processEvent(state, event) {
+        const source = this.state.entities.get(event.sourceId);
+        const target = this.state.entities.get(event.targetId);
 
         switch (event.type) {
             case EVENT_TYPE.HIT:
-                const source = state.entities.get(event.sourceId);
-                const target = state.entities.get(event.targetId);
-                if (source && target) {
-                    Calculator.calculateHit(source, target, event.data);
-                }
+                if (source && target) Calculator.calculateHit(source, target, event.data);
+                break;
+            
+            case EVENT_TYPE.ARTS_INFLICTION:
+                target?.getComponent('Infliction')?.applyElement(event.data.element, state, event);
+                break;
+
+            case EVENT_TYPE.PHYSICAL_APPLICATION:
+                target?.getComponent('Physical')?.handleApplication(state, event);
+                break;
+
+            case EVENT_TYPE.STATUS_APPLICATION:
+            case EVENT_TYPE.STATUS_EXPIRATION:
+            case EVENT_TYPE.STATUS_TICK:
+                target?.getComponent('Status')?.handleEvent(state, event);
+                break;
+
+            case EVENT_TYPE.SKILL_EVENT:
+                target?.getComponent('Ability')?.handleEvent(state, event);
+                break;
+
+            case EVENT_TYPE.STATE_UPDATE:
+                this.state.handleStateUpdate(event);
                 break;
         }
 
         this.broadcast(state, event);
     }
 
-    static broadcast(state, event) {
+    broadcast(state, event) {
         const subscribers = state.subscriptions.get(event.type);
         if (!subscribers) return;
 
@@ -76,7 +110,7 @@ export default class Engine {
         }
     }
 
-    static subscribe(state, eventType, entityId, componentType) {
+    subscribe(state, eventType, entityId, componentType) {
         if (!state.subscriptions.has(eventType)) {
             state.subscriptions.set(eventType, new Set());
         }
@@ -84,7 +118,7 @@ export default class Engine {
         state.subscriptions.get(eventType).add(address);
     }
 
-    static unsubscribe(state, eventType, entityId, componentType) {
+    unsubscribe(state, eventType, entityId, componentType) {
         const subscribers = state.subscriptions.get(eventType);
         if (subscribers) {
             subscribers.delete(`${entityId}:${componentType}`);
@@ -95,13 +129,5 @@ export default class Engine {
         const entity = this.state.entities.get(entityId);
         const statComponent = entity?.components.get('Stats');
         return statComponent?.getStat(stat);
-    }
-
-    /**
-     * Adds a event to the queue. Used by components to inject new events.
-     * @param {SimEvent} event 
-     */
-    pushEvent(event) {
-        this.eventQueue.push(event);
     }
 }

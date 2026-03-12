@@ -2,16 +2,16 @@
  * Generic container for an actor in the simulation (playable character, enemy or otherwise).
  */
 class Entity {    
-    constructor(instanceId, charId, name, team) {
+    constructor(engine, instanceId, charId, name, team) {
+        this.engine = engine;
         this.instanceId = instanceId;
         this.charId = charId;
         this.name = name;
-        
+        this.team = team;
         this.components = new Map();
     }
 
     addComponent(type, component) {
-        component.owner = this;
         this.components.set(type, component);
     }
 
@@ -19,10 +19,10 @@ class Entity {
         this.components.get(type);
     }
 
-    clone() {
-        const copy = new Entity(this.name);
+    clone(newEngine) {
+        const copy = new Entity(newEngine, this.instanceId, this.charId, this.name, this.team);
         for (const [type, component] of this.components) {
-            copy.addComponent(this.name, component.clone());
+            copy.addComponent(this.name, component.clone(newEngine));
         }
         return copy;
     }
