@@ -1,0 +1,1858 @@
+{
+  "attributes": [
+    {
+      "elite": 0,
+      "level": 1,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "14.020618556701033",
+        "agility": "14.690721649484537",
+        "intellect": "12.474226804123715",
+        "will": "10.103092783505154",
+        "hp": 500,
+        "atk": 30,
+        "defense": 0,
+        "igniteDamageScalar": 1,
+        "physicalInflictionDamageScalar": 1
+      }
+    },
+    {
+      "elite": 0,
+      "level": 2,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "15.070481800967812",
+        "agility": "16.15979381443299",
+        "intellect": "13.721649484536087",
+        "will": "11.11340206185567",
+        "hp": 556,
+        "atk": 33,
+        "defense": 0,
+        "igniteDamageScalar": "1.0051020408163267",
+        "physicalInflictionDamageScalar": "1.0025510204081631"
+      }
+    },
+    {
+      "elite": 0,
+      "level": 3,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "16.12034504523459",
+        "agility": "17.628865979381445",
+        "intellect": "14.969072164948457",
+        "will": "12.123711340206185",
+        "hp": 612,
+        "atk": 36,
+        "defense": 0,
+        "igniteDamageScalar": "1.010204081632653",
+        "physicalInflictionDamageScalar": "1.0051020408163265"
+      }
+    },
+    {
+      "elite": 0,
+      "level": 4,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "17.17020828950137",
+        "agility": "19.0979381443299",
+        "intellect": "16.216494845360828",
+        "will": "13.1340206185567",
+        "hp": 668,
+        "atk": 39,
+        "defense": 0,
+        "igniteDamageScalar": "1.0153061224489797",
+        "physicalInflictionDamageScalar": "1.0076530612244898"
+      }
+    },
+    {
+      "elite": 0,
+      "level": 5,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "18.22007153376815",
+        "agility": "20.567010309278352",
+        "intellect": "17.4639175257732",
+        "will": "14.144329896907216",
+        "hp": 724,
+        "atk": 42,
+        "defense": 0,
+        "igniteDamageScalar": "1.0204081632653061",
+        "physicalInflictionDamageScalar": "1.010204081632653"
+      }
+    },
+    {
+      "elite": 0,
+      "level": 6,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "19.26993477803493",
+        "agility": "22.036082474226806",
+        "intellect": "18.71134020618557",
+        "will": "15.154639175257731",
+        "hp": 781,
+        "atk": 45,
+        "defense": 0,
+        "igniteDamageScalar": "1.0255102040816326",
+        "physicalInflictionDamageScalar": "1.0127551020408163"
+      }
+    },
+    {
+      "elite": 0,
+      "level": 7,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "20.319798022301708",
+        "agility": "23.50515463917526",
+        "intellect": "19.958762886597945",
+        "will": "16.164948453608247",
+        "hp": 837,
+        "atk": 49,
+        "defense": 0,
+        "igniteDamageScalar": "1.030612244897959",
+        "physicalInflictionDamageScalar": "1.0153061224489797"
+      }
+    },
+    {
+      "elite": 0,
+      "level": 8,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "21.369661266568485",
+        "agility": "24.97422680412371",
+        "intellect": "21.206185567010316",
+        "will": "17.175257731958762",
+        "hp": 893,
+        "atk": 52,
+        "defense": 0,
+        "igniteDamageScalar": "1.0357142857142858",
+        "physicalInflictionDamageScalar": "1.0178571428571428"
+      }
+    },
+    {
+      "elite": 0,
+      "level": 9,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "22.419524510835267",
+        "agility": "26.443298969072167",
+        "intellect": "22.453608247422686",
+        "will": "18.185567010309278",
+        "hp": 949,
+        "atk": 55,
+        "defense": 0,
+        "igniteDamageScalar": "1.0408163265306123",
+        "physicalInflictionDamageScalar": "1.0204081632653061"
+      }
+    },
+    {
+      "elite": 0,
+      "level": 10,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "23.469387755102044",
+        "agility": "27.912371134020617",
+        "intellect": "23.701030927835056",
+        "will": "19.195876288659793",
+        "hp": 1005,
+        "atk": 58,
+        "defense": 0,
+        "igniteDamageScalar": "1.0459183673469388",
+        "physicalInflictionDamageScalar": "1.0229591836734695"
+      }
+    },
+    {
+      "elite": 0,
+      "level": 11,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "24.519250999368822",
+        "agility": "29.381443298969074",
+        "intellect": "24.948453608247426",
+        "will": "20.20618556701031",
+        "hp": 1061,
+        "atk": 61,
+        "defense": 0,
+        "igniteDamageScalar": "1.0510204081632655",
+        "physicalInflictionDamageScalar": "1.0255102040816326"
+      }
+    },
+    {
+      "elite": 0,
+      "level": 12,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "25.569114243635603",
+        "agility": "30.850515463917525",
+        "intellect": "26.1958762886598",
+        "will": "21.216494845360824",
+        "hp": 1117,
+        "atk": 64,
+        "defense": 0,
+        "igniteDamageScalar": "1.0561224489795917",
+        "physicalInflictionDamageScalar": "1.0280612244897958"
+      }
+    },
+    {
+      "elite": 0,
+      "level": 13,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "26.61897748790238",
+        "agility": "32.319587628865975",
+        "intellect": "27.443298969072174",
+        "will": "22.22680412371134",
+        "hp": 1173,
+        "atk": 67,
+        "defense": 0,
+        "igniteDamageScalar": "1.0612244897959184",
+        "physicalInflictionDamageScalar": "1.0306122448979593"
+      }
+    },
+    {
+      "elite": 0,
+      "level": 14,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "27.66884073216916",
+        "agility": "33.78865979381443",
+        "intellect": "28.690721649484544",
+        "will": "23.237113402061855",
+        "hp": 1230,
+        "atk": 70,
+        "defense": 0,
+        "igniteDamageScalar": "1.066326530612245",
+        "physicalInflictionDamageScalar": "1.0331632653061225"
+      }
+    },
+    {
+      "elite": 0,
+      "level": 15,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "28.71870397643594",
+        "agility": "35.25773195876289",
+        "intellect": "29.938144329896915",
+        "will": "24.24742268041237",
+        "hp": 1286,
+        "atk": 73,
+        "defense": 0,
+        "igniteDamageScalar": "1.0714285714285714",
+        "physicalInflictionDamageScalar": "1.0357142857142856"
+      }
+    },
+    {
+      "elite": 0,
+      "level": 16,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "29.768567220702717",
+        "agility": "36.72680412371134",
+        "intellect": "31.185567010309285",
+        "will": "25.257731958762886",
+        "hp": 1342,
+        "atk": 76,
+        "defense": 0,
+        "igniteDamageScalar": "1.0765306122448979",
+        "physicalInflictionDamageScalar": "1.038265306122449"
+      }
+    },
+    {
+      "elite": 0,
+      "level": 17,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "30.818430464969495",
+        "agility": "38.19587628865979",
+        "intellect": "32.432989690721655",
+        "will": "26.2680412371134",
+        "hp": 1398,
+        "atk": 80,
+        "defense": 0,
+        "igniteDamageScalar": "1.0816326530612246",
+        "physicalInflictionDamageScalar": "1.0408163265306123"
+      }
+    },
+    {
+      "elite": 0,
+      "level": 18,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "31.868293709236276",
+        "agility": "39.66494845360825",
+        "intellect": "33.680412371134025",
+        "will": "27.278350515463917",
+        "hp": 1454,
+        "atk": 83,
+        "defense": 0,
+        "igniteDamageScalar": "1.086734693877551",
+        "physicalInflictionDamageScalar": "1.0433673469387754"
+      }
+    },
+    {
+      "elite": 0,
+      "level": 19,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "32.91815695350306",
+        "agility": "41.134020618556704",
+        "intellect": "34.9278350515464",
+        "will": "28.288659793814432",
+        "hp": 1510,
+        "atk": 86,
+        "defense": 0,
+        "igniteDamageScalar": "1.0918367346938775",
+        "physicalInflictionDamageScalar": "1.0459183673469388"
+      }
+    },
+    {
+      "elite": 0,
+      "level": 20,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "33.96802019776983",
+        "agility": "42.603092783505154",
+        "intellect": "36.17525773195877",
+        "will": "29.298969072164947",
+        "hp": 1566,
+        "atk": 89,
+        "defense": 0,
+        "igniteDamageScalar": "1.0969387755102042",
+        "physicalInflictionDamageScalar": "1.0484693877551021"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 20,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "33.96802019776983",
+        "agility": "42.603092783505154",
+        "intellect": "36.17525773195877",
+        "will": "29.298969072164947",
+        "hp": 1566,
+        "atk": 89,
+        "defense": 0,
+        "igniteDamageScalar": "1.0969387755102042",
+        "physicalInflictionDamageScalar": "1.0484693877551021"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 21,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "35.01788344203661",
+        "agility": "44.072164948453604",
+        "intellect": "37.42268041237114",
+        "will": "30.309278350515463",
+        "hp": 1622,
+        "atk": 92,
+        "defense": 0,
+        "igniteDamageScalar": "1.1020408163265305",
+        "physicalInflictionDamageScalar": "1.0510204081632653"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 22,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "36.067746686303394",
+        "agility": "45.54123711340206",
+        "intellect": "38.67010309278351",
+        "will": "31.31958762886598",
+        "hp": 1679,
+        "atk": 95,
+        "defense": 0,
+        "igniteDamageScalar": "1.1071428571428572",
+        "physicalInflictionDamageScalar": "1.0535714285714286"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 23,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "37.11760993057017",
+        "agility": "47.01030927835051",
+        "intellect": "39.917525773195884",
+        "will": "32.329896907216494",
+        "hp": 1735,
+        "atk": 98,
+        "defense": 0,
+        "igniteDamageScalar": "1.1122448979591837",
+        "physicalInflictionDamageScalar": "1.056122448979592"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 24,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "38.16747317483695",
+        "agility": "48.47938144329897",
+        "intellect": "41.164948453608254",
+        "will": "33.34020618556701",
+        "hp": 1791,
+        "atk": 101,
+        "defense": 0,
+        "igniteDamageScalar": "1.1173469387755102",
+        "physicalInflictionDamageScalar": "1.058673469387755"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 25,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "39.21733641910373",
+        "agility": "49.94845360824742",
+        "intellect": "42.41237113402063",
+        "will": "34.350515463917525",
+        "hp": 1847,
+        "atk": 104,
+        "defense": 0,
+        "igniteDamageScalar": "1.1224489795918366",
+        "physicalInflictionDamageScalar": "1.0612244897959182"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 26,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "40.267199663370505",
+        "agility": "51.41752577319588",
+        "intellect": 43.659793814433,
+        "will": "35.360824742268036",
+        "hp": 1903,
+        "atk": 107,
+        "defense": 0,
+        "igniteDamageScalar": "1.1275510204081634",
+        "physicalInflictionDamageScalar": "1.0637755102040818"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 27,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "41.317062907637286",
+        "agility": "52.88659793814433",
+        "intellect": "44.90721649484537",
+        "will": "36.371134020618555",
+        "hp": 1959,
+        "atk": 111,
+        "defense": 0,
+        "igniteDamageScalar": "1.1326530612244898",
+        "physicalInflictionDamageScalar": "1.066326530612245"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 28,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "42.36692615190407",
+        "agility": "54.355670103092784",
+        "intellect": "46.15463917525774",
+        "will": "37.381443298969074",
+        "hp": 2015,
+        "atk": 114,
+        "defense": 0,
+        "igniteDamageScalar": "1.1377551020408163",
+        "physicalInflictionDamageScalar": "1.068877551020408"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 29,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "43.41678939617084",
+        "agility": "55.824742268041234",
+        "intellect": "47.40206185567011",
+        "will": "38.391752577319586",
+        "hp": 2071,
+        "atk": 117,
+        "defense": 0,
+        "igniteDamageScalar": "1.142857142857143",
+        "physicalInflictionDamageScalar": "1.0714285714285714"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 30,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "44.46665264043762",
+        "agility": "57.29381443298969",
+        "intellect": "48.64948453608249",
+        "will": "39.4020618556701",
+        "hp": 2128,
+        "atk": 120,
+        "defense": 0,
+        "igniteDamageScalar": "1.1479591836734693",
+        "physicalInflictionDamageScalar": "1.0739795918367347"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 31,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "45.516515884704404",
+        "agility": "58.76288659793814",
+        "intellect": "49.89690721649486",
+        "will": "40.41237113402062",
+        "hp": 2184,
+        "atk": 123,
+        "defense": 0,
+        "igniteDamageScalar": "1.153061224489796",
+        "physicalInflictionDamageScalar": "1.0765306122448979"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 32,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "46.56637912897118",
+        "agility": "60.2319587628866",
+        "intellect": "51.14432989690723",
+        "will": "41.422680412371136",
+        "hp": 2240,
+        "atk": 126,
+        "defense": 0,
+        "igniteDamageScalar": "1.1581632653061225",
+        "physicalInflictionDamageScalar": "1.0790816326530612"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 33,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "47.61624237323796",
+        "agility": "61.70103092783505",
+        "intellect": "52.3917525773196",
+        "will": "42.43298969072165",
+        "hp": 2296,
+        "atk": 129,
+        "defense": 0,
+        "igniteDamageScalar": "1.163265306122449",
+        "physicalInflictionDamageScalar": "1.0816326530612246"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 34,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "48.66610561750474",
+        "agility": "63.1701030927835",
+        "intellect": "53.63917525773197",
+        "will": "43.44329896907217",
+        "hp": 2352,
+        "atk": 132,
+        "defense": 0,
+        "igniteDamageScalar": "1.1683673469387754",
+        "physicalInflictionDamageScalar": "1.0841836734693877"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 35,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "49.715968861771515",
+        "agility": "64.63917525773195",
+        "intellect": "54.88659793814434",
+        "will": "44.45360824742268",
+        "hp": 2408,
+        "atk": 135,
+        "defense": 0,
+        "igniteDamageScalar": "1.1734693877551021",
+        "physicalInflictionDamageScalar": "1.086734693877551"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 36,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "50.765832106038296",
+        "agility": "66.1082474226804",
+        "intellect": "56.13402061855671",
+        "will": "45.46391752577319",
+        "hp": 2464,
+        "atk": 138,
+        "defense": 0,
+        "igniteDamageScalar": "1.1785714285714286",
+        "physicalInflictionDamageScalar": "1.0892857142857144"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 37,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "51.81569535030508",
+        "agility": "67.57731958762886",
+        "intellect": "57.38144329896909",
+        "will": "46.47422680412371",
+        "hp": 2520,
+        "atk": 142,
+        "defense": 0,
+        "igniteDamageScalar": "1.183673469387755",
+        "physicalInflictionDamageScalar": "1.0918367346938775"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 38,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "52.86555859457185",
+        "agility": "69.0463917525773",
+        "intellect": "58.62886597938146",
+        "will": "47.48453608247423",
+        "hp": 2577,
+        "atk": 145,
+        "defense": 0,
+        "igniteDamageScalar": "1.1887755102040818",
+        "physicalInflictionDamageScalar": "1.0943877551020407"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 39,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "53.91542183883863",
+        "agility": "70.51546391752578",
+        "intellect": "59.87628865979383",
+        "will": "48.49484536082474",
+        "hp": 2633,
+        "atk": 148,
+        "defense": 0,
+        "igniteDamageScalar": "1.193877551020408",
+        "physicalInflictionDamageScalar": "1.096938775510204"
+      }
+    },
+    {
+      "elite": 1,
+      "level": 40,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "54.965285083105414",
+        "agility": "71.98453608247422",
+        "intellect": "61.1237113402062",
+        "will": "49.50515463917525",
+        "hp": 2689,
+        "atk": 151,
+        "defense": 0,
+        "igniteDamageScalar": "1.1989795918367347",
+        "physicalInflictionDamageScalar": "1.0994897959183674"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 40,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "54.965285083105414",
+        "agility": "71.98453608247422",
+        "intellect": "61.1237113402062",
+        "will": "49.50515463917525",
+        "hp": 2689,
+        "atk": 151,
+        "defense": 0,
+        "igniteDamageScalar": "1.1989795918367347",
+        "physicalInflictionDamageScalar": "1.0994897959183674"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 41,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "56.015148327372195",
+        "agility": "73.45360824742268",
+        "intellect": "62.37113402061857",
+        "will": "50.51546391752577",
+        "hp": 2745,
+        "atk": 154,
+        "defense": 0,
+        "igniteDamageScalar": "1.2040816326530612",
+        "physicalInflictionDamageScalar": "1.1020408163265305"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 42,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "57.06501157163897",
+        "agility": "74.92268041237114",
+        "intellect": "63.61855670103094",
+        "will": "51.52577319587629",
+        "hp": 2801,
+        "atk": 157,
+        "defense": 0,
+        "igniteDamageScalar": "1.2091836734693877",
+        "physicalInflictionDamageScalar": "1.1045918367346939"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 43,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "58.11487481590575",
+        "agility": "76.39175257731958",
+        "intellect": "64.86597938144331",
+        "will": "52.5360824742268",
+        "hp": 2857,
+        "atk": 160,
+        "defense": 0,
+        "igniteDamageScalar": "1.2142857142857142",
+        "physicalInflictionDamageScalar": "1.1071428571428572"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 44,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "59.16473806017253",
+        "agility": "77.86082474226804",
+        "intellect": "66.11340206185568",
+        "will": "53.546391752577314",
+        "hp": 2913,
+        "atk": 163,
+        "defense": 0,
+        "igniteDamageScalar": "1.219387755102041",
+        "physicalInflictionDamageScalar": "1.1096938775510203"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 45,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "60.214601304439306",
+        "agility": "79.3298969072165",
+        "intellect": "67.36082474226805",
+        "will": "54.55670103092783",
+        "hp": 2969,
+        "atk": 166,
+        "defense": 0,
+        "igniteDamageScalar": "1.2244897959183674",
+        "physicalInflictionDamageScalar": "1.1122448979591837"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 46,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "61.26446454870609",
+        "agility": "80.79896907216494",
+        "intellect": "68.60824742268042",
+        "will": "55.56701030927835",
+        "hp": 3026,
+        "atk": 169,
+        "defense": 0,
+        "igniteDamageScalar": "1.2295918367346939",
+        "physicalInflictionDamageScalar": "1.114795918367347"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 47,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "62.31432779297287",
+        "agility": "82.26804123711341",
+        "intellect": "69.85567010309279",
+        "will": "56.577319587628864",
+        "hp": 3082,
+        "atk": 173,
+        "defense": 0,
+        "igniteDamageScalar": "1.2346938775510206",
+        "physicalInflictionDamageScalar": "1.1173469387755102"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 48,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "63.36419103723964",
+        "agility": "83.73711340206185",
+        "intellect": "71.10309278350516",
+        "will": "57.587628865979376",
+        "hp": 3138,
+        "atk": 176,
+        "defense": 0,
+        "igniteDamageScalar": "1.2397959183673468",
+        "physicalInflictionDamageScalar": "1.1198979591836735"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 49,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "64.41405428150642",
+        "agility": "85.2061855670103",
+        "intellect": "72.35051546391755",
+        "will": "58.597938144329895",
+        "hp": 3194,
+        "atk": 179,
+        "defense": 0,
+        "igniteDamageScalar": "1.2448979591836735",
+        "physicalInflictionDamageScalar": "1.1224489795918369"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 50,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "65.46391752577321",
+        "agility": "86.67525773195877",
+        "intellect": "73.59793814432992",
+        "will": "59.608247422680414",
+        "hp": 3250,
+        "atk": 182,
+        "defense": 0,
+        "igniteDamageScalar": 1.25,
+        "physicalInflictionDamageScalar": 1.125
+      }
+    },
+    {
+      "elite": 2,
+      "level": 51,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "66.51378077003999",
+        "agility": "88.14432989690721",
+        "intellect": "74.84536082474229",
+        "will": "60.618556701030926",
+        "hp": 3306,
+        "atk": 185,
+        "defense": 0,
+        "igniteDamageScalar": "1.2551020408163265",
+        "physicalInflictionDamageScalar": "1.1275510204081631"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 52,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "67.56364401430676",
+        "agility": "89.61340206185565",
+        "intellect": "76.09278350515466",
+        "will": "61.62886597938144",
+        "hp": 3362,
+        "atk": 188,
+        "defense": 0,
+        "igniteDamageScalar": "1.260204081632653",
+        "physicalInflictionDamageScalar": "1.1301020408163265"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 53,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "68.61350725857355",
+        "agility": "91.08247422680412",
+        "intellect": "77.34020618556703",
+        "will": "62.63917525773196",
+        "hp": 3418,
+        "atk": 191,
+        "defense": 0,
+        "igniteDamageScalar": "1.2653061224489797",
+        "physicalInflictionDamageScalar": "1.1326530612244898"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 54,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "69.66337050284032",
+        "agility": "92.55154639175257",
+        "intellect": "78.5876288659794",
+        "will": "63.649484536082475",
+        "hp": 3474,
+        "atk": 194,
+        "defense": 0,
+        "igniteDamageScalar": "1.2704081632653061",
+        "physicalInflictionDamageScalar": "1.135204081632653"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 55,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "70.7132337471071",
+        "agility": "94.02061855670104",
+        "intellect": "79.83505154639177",
+        "will": "64.65979381443299",
+        "hp": 3531,
+        "atk": 197,
+        "defense": 0,
+        "igniteDamageScalar": "1.2755102040816326",
+        "physicalInflictionDamageScalar": "1.1377551020408163"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 56,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "71.76309699137389",
+        "agility": "95.48969072164948",
+        "intellect": "81.08247422680414",
+        "will": "65.6701030927835",
+        "hp": 3587,
+        "atk": 200,
+        "defense": 0,
+        "igniteDamageScalar": "1.2806122448979593",
+        "physicalInflictionDamageScalar": "1.1403061224489797"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 57,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "72.81296023564066",
+        "agility": "96.95876288659792",
+        "intellect": "82.32989690721651",
+        "will": "66.68041237113403",
+        "hp": 3643,
+        "atk": 204,
+        "defense": 0,
+        "igniteDamageScalar": "1.2857142857142856",
+        "physicalInflictionDamageScalar": "1.1428571428571428"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 58,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "73.86282347990743",
+        "agility": "98.4278350515464",
+        "intellect": "83.57731958762888",
+        "will": "67.69072164948454",
+        "hp": 3699,
+        "atk": 207,
+        "defense": 0,
+        "igniteDamageScalar": "1.2908163265306123",
+        "physicalInflictionDamageScalar": "1.1454081632653061"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 59,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "74.91268672417422",
+        "agility": "99.89690721649484",
+        "intellect": "84.82474226804126",
+        "will": "68.70103092783505",
+        "hp": 3755,
+        "atk": 210,
+        "defense": 0,
+        "igniteDamageScalar": "1.2959183673469388",
+        "physicalInflictionDamageScalar": "1.1479591836734695"
+      }
+    },
+    {
+      "elite": 2,
+      "level": 60,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": 75.962549968441,
+        "agility": "101.36597938144328",
+        "intellect": "86.07216494845363",
+        "will": "69.71134020618555",
+        "hp": 3811,
+        "atk": 213,
+        "defense": 0,
+        "igniteDamageScalar": "1.3010204081632655",
+        "physicalInflictionDamageScalar": "1.1505102040816326"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 60,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": 75.962549968441,
+        "agility": "101.36597938144328",
+        "intellect": "86.07216494845363",
+        "will": "69.71134020618555",
+        "hp": 3811,
+        "atk": 213,
+        "defense": 0,
+        "igniteDamageScalar": "1.3010204081632655",
+        "physicalInflictionDamageScalar": "1.1505102040816326"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 61,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "77.01241321270777",
+        "agility": "102.83505154639175",
+        "intellect": 87.319587628866,
+        "will": "70.72164948453607",
+        "hp": 3867,
+        "atk": 216,
+        "defense": 0,
+        "igniteDamageScalar": "1.3061224489795917",
+        "physicalInflictionDamageScalar": "1.1530612244897958"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 62,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "78.06227645697456",
+        "agility": "104.3041237113402",
+        "intellect": "88.56701030927837",
+        "will": "71.73195876288659",
+        "hp": 3923,
+        "atk": 219,
+        "defense": 0,
+        "igniteDamageScalar": "1.3112244897959184",
+        "physicalInflictionDamageScalar": "1.155612244897959"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 63,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "79.11213970124133",
+        "agility": "105.77319587628867",
+        "intellect": "89.81443298969074",
+        "will": "72.74226804123711",
+        "hp": 3980,
+        "atk": 222,
+        "defense": 0,
+        "igniteDamageScalar": "1.316326530612245",
+        "physicalInflictionDamageScalar": "1.1581632653061225"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 64,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "80.16200294550812",
+        "agility": "107.24226804123711",
+        "intellect": "91.06185567010311",
+        "will": "73.75257731958763",
+        "hp": 4036,
+        "atk": 225,
+        "defense": 0,
+        "igniteDamageScalar": "1.3214285714285714",
+        "physicalInflictionDamageScalar": "1.1607142857142856"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 65,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "81.2118661897749",
+        "agility": "108.71134020618555",
+        "intellect": "92.30927835051548",
+        "will": "74.76288659793815",
+        "hp": 4092,
+        "atk": 228,
+        "defense": 0,
+        "igniteDamageScalar": "1.326530612244898",
+        "physicalInflictionDamageScalar": "1.163265306122449"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 66,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "82.26172943404167",
+        "agility": "110.18041237113403",
+        "intellect": "93.55670103092785",
+        "will": "75.77319587628867",
+        "hp": 4148,
+        "atk": 231,
+        "defense": 0,
+        "igniteDamageScalar": "1.3316326530612246",
+        "physicalInflictionDamageScalar": "1.1658163265306123"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 67,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "83.31159267830846",
+        "agility": "111.64948453608247",
+        "intellect": "94.80412371134022",
+        "will": "76.78350515463919",
+        "hp": 4204,
+        "atk": 235,
+        "defense": 0,
+        "igniteDamageScalar": "1.336734693877551",
+        "physicalInflictionDamageScalar": "1.1683673469387754"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 68,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "84.36145592257523",
+        "agility": "113.11855670103091",
+        "intellect": "96.0515463917526",
+        "will": "77.79381443298968",
+        "hp": 4260,
+        "atk": 238,
+        "defense": 0,
+        "igniteDamageScalar": "1.3418367346938775",
+        "physicalInflictionDamageScalar": "1.1709183673469388"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 69,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": 85.411319166842,
+        "agility": "114.58762886597938",
+        "intellect": "97.29896907216497",
+        "will": "78.8041237113402",
+        "hp": 4316,
+        "atk": 241,
+        "defense": 0,
+        "igniteDamageScalar": "1.3469387755102042",
+        "physicalInflictionDamageScalar": "1.1734693877551021"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 70,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "86.4611824111088",
+        "agility": "116.05670103092783",
+        "intellect": "98.54639175257734",
+        "will": "79.81443298969072",
+        "hp": 4372,
+        "atk": 244,
+        "defense": 0,
+        "igniteDamageScalar": "1.3520408163265305",
+        "physicalInflictionDamageScalar": "1.1760204081632653"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 71,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "87.51104565537557",
+        "agility": "117.52577319587627",
+        "intellect": "99.7938144329897",
+        "will": "80.82474226804123",
+        "hp": 4429,
+        "atk": 247,
+        "defense": 0,
+        "igniteDamageScalar": "1.3571428571428572",
+        "physicalInflictionDamageScalar": "1.1785714285714286"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 72,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "88.56090889964234",
+        "agility": "118.99484536082474",
+        "intellect": "101.04123711340209",
+        "will": "81.83505154639175",
+        "hp": 4485,
+        "atk": 250,
+        "defense": 0,
+        "igniteDamageScalar": "1.3622448979591837",
+        "physicalInflictionDamageScalar": "1.181122448979592"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 73,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "89.61077214390913",
+        "agility": "120.46391752577318",
+        "intellect": "102.28865979381446",
+        "will": "82.84536082474227",
+        "hp": 4541,
+        "atk": 253,
+        "defense": 0,
+        "igniteDamageScalar": "1.3673469387755104",
+        "physicalInflictionDamageScalar": "1.183673469387755"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 74,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "90.6606353881759",
+        "agility": "121.93298969072166",
+        "intellect": "103.53608247422683",
+        "will": "83.85567010309279",
+        "hp": 4597,
+        "atk": 256,
+        "defense": 0,
+        "igniteDamageScalar": "1.3724489795918369",
+        "physicalInflictionDamageScalar": "1.1862244897959182"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 75,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "91.71049863244268",
+        "agility": "123.4020618556701",
+        "intellect": "104.7835051546392",
+        "will": "84.86597938144331",
+        "hp": 4653,
+        "atk": 259,
+        "defense": 0,
+        "igniteDamageScalar": "1.3775510204081634",
+        "physicalInflictionDamageScalar": "1.1887755102040816"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 76,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "92.76036187670947",
+        "agility": "124.87113402061854",
+        "intellect": "106.03092783505157",
+        "will": "85.8762886597938",
+        "hp": 4709,
+        "atk": 262,
+        "defense": 0,
+        "igniteDamageScalar": "1.38265306122449",
+        "physicalInflictionDamageScalar": "1.191326530612245"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 77,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "93.81022512097624",
+        "agility": "126.34020618556701",
+        "intellect": "107.27835051546394",
+        "will": "86.88659793814432",
+        "hp": 4765,
+        "atk": 266,
+        "defense": 0,
+        "igniteDamageScalar": "1.3877551020408163",
+        "physicalInflictionDamageScalar": "1.193877551020408"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 78,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "94.86008836524302",
+        "agility": "127.80927835051546",
+        "intellect": "108.52577319587631",
+        "will": "87.89690721649484",
+        "hp": 4821,
+        "atk": 269,
+        "defense": 0,
+        "igniteDamageScalar": "1.392857142857143",
+        "physicalInflictionDamageScalar": "1.1964285714285714"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 79,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "95.9099516095098",
+        "agility": "129.2783505154639",
+        "intellect": "109.77319587628868",
+        "will": "88.90721649484536",
+        "hp": 4878,
+        "atk": 272,
+        "defense": 0,
+        "igniteDamageScalar": "1.3979591836734695",
+        "physicalInflictionDamageScalar": "1.1989795918367347"
+      }
+    },
+    {
+      "elite": 3,
+      "level": 80,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "96.95981485377658",
+        "agility": "130.74742268041237",
+        "intellect": "111.02061855670105",
+        "will": "89.91752577319588",
+        "hp": 4934,
+        "atk": 275,
+        "defense": 0,
+        "igniteDamageScalar": "1.403061224489796",
+        "physicalInflictionDamageScalar": "1.2015306122448979"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 80,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "96.95981485377658",
+        "agility": "130.74742268041237",
+        "intellect": "111.02061855670105",
+        "will": "89.91752577319588",
+        "hp": 4934,
+        "atk": 275,
+        "defense": 0,
+        "igniteDamageScalar": "1.403061224489796",
+        "physicalInflictionDamageScalar": "1.2015306122448979"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 81,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "98.00967809804337",
+        "agility": "132.2164948453608",
+        "intellect": "112.26804123711342",
+        "will": "90.9278350515464",
+        "hp": 4990,
+        "atk": 278,
+        "defense": 0,
+        "igniteDamageScalar": "1.4081632653061225",
+        "physicalInflictionDamageScalar": "1.2040816326530612"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 82,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "99.05954134231014",
+        "agility": "133.68556701030926",
+        "intellect": "113.51546391752579",
+        "will": "91.93814432989691",
+        "hp": 5046,
+        "atk": 281,
+        "defense": 0,
+        "igniteDamageScalar": "1.4132653061224492",
+        "physicalInflictionDamageScalar": "1.2066326530612246"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 83,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "100.10940458657691",
+        "agility": "135.15463917525773",
+        "intellect": "114.76288659793816",
+        "will": "92.94845360824743",
+        "hp": 5102,
+        "atk": 284,
+        "defense": 0,
+        "igniteDamageScalar": "1.4183673469387756",
+        "physicalInflictionDamageScalar": "1.2091836734693877"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 84,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "101.1592678308437",
+        "agility": "136.62371134020617",
+        "intellect": "116.01030927835053",
+        "will": "93.95876288659792",
+        "hp": 5158,
+        "atk": 287,
+        "defense": 0,
+        "igniteDamageScalar": "1.4234693877551021",
+        "physicalInflictionDamageScalar": "1.211734693877551"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 85,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "102.20913107511048",
+        "agility": "138.09278350515464",
+        "intellect": "117.25773195876292",
+        "will": "94.96907216494844",
+        "hp": 5214,
+        "atk": 290,
+        "defense": 0,
+        "igniteDamageScalar": "1.4285714285714288",
+        "physicalInflictionDamageScalar": "1.2142857142857144"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 86,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "103.25899431937725",
+        "agility": "139.56185567010309",
+        "intellect": "118.50515463917529",
+        "will": "95.97938144329896",
+        "hp": 5270,
+        "atk": 293,
+        "defense": 0,
+        "igniteDamageScalar": "1.433673469387755",
+        "physicalInflictionDamageScalar": "1.2168367346938775"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 87,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "104.30885756364404",
+        "agility": "141.03092783505153",
+        "intellect": "119.75257731958766",
+        "will": "96.98969072164948",
+        "hp": 5327,
+        "atk": 297,
+        "defense": 0,
+        "igniteDamageScalar": "1.4387755102040818",
+        "physicalInflictionDamageScalar": "1.2193877551020407"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 88,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "105.35872080791081",
+        "agility": 142.5,
+        "intellect": "121.00000000000003",
+        "will": 98,
+        "hp": 5383,
+        "atk": 300,
+        "defense": 0,
+        "igniteDamageScalar": "1.4438775510204083",
+        "physicalInflictionDamageScalar": "1.221938775510204"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 89,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "106.40858405217759",
+        "agility": "143.96907216494844",
+        "intellect": "122.2474226804124",
+        "will": "99.01030927835052",
+        "hp": 5439,
+        "atk": 303,
+        "defense": 0,
+        "igniteDamageScalar": "1.4489795918367347",
+        "physicalInflictionDamageScalar": "1.2244897959183674"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 90,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "107.45844729644438",
+        "agility": "145.43814432989691",
+        "intellect": "123.49484536082477",
+        "will": "100.02061855670104",
+        "hp": 5495,
+        "atk": 306,
+        "defense": 0,
+        "igniteDamageScalar": "1.4540816326530612",
+        "physicalInflictionDamageScalar": "1.2270408163265305"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 91,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "108.50831054071115",
+        "agility": "146.90721649484536",
+        "intellect": "124.74226804123714",
+        "will": "101.03092783505156",
+        "hp": 5551,
+        "atk": 309,
+        "defense": 0,
+        "igniteDamageScalar": "1.459183673469388",
+        "physicalInflictionDamageScalar": "1.2295918367346939"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 92,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "109.55817378497792",
+        "agility": "148.3762886597938",
+        "intellect": "125.98969072164951",
+        "will": "102.04123711340205",
+        "hp": 5607,
+        "atk": 312,
+        "defense": 0,
+        "igniteDamageScalar": "1.4642857142857144",
+        "physicalInflictionDamageScalar": "1.2321428571428572"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 93,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "110.60803702924471",
+        "agility": "149.84536082474227",
+        "intellect": "127.23711340206188",
+        "will": "103.05154639175257",
+        "hp": 5663,
+        "atk": 315,
+        "defense": 0,
+        "igniteDamageScalar": "1.469387755102041",
+        "physicalInflictionDamageScalar": "1.2346938775510203"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 94,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "111.65790027351149",
+        "agility": "151.31443298969072",
+        "intellect": "128.48453608247425",
+        "will": "104.06185567010309",
+        "hp": 5719,
+        "atk": 318,
+        "defense": 0,
+        "igniteDamageScalar": "1.4744897959183676",
+        "physicalInflictionDamageScalar": "1.2372448979591837"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 95,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "112.70776351777826",
+        "agility": "152.7835051546392",
+        "intellect": "129.73195876288662",
+        "will": "105.0721649484536",
+        "hp": 5776,
+        "atk": 321,
+        "defense": 0,
+        "igniteDamageScalar": "1.4795918367346939",
+        "physicalInflictionDamageScalar": "1.239795918367347"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 96,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "113.75762676204505",
+        "agility": "154.25257731958763",
+        "intellect": "130.979381443299",
+        "will": "106.08247422680412",
+        "hp": 5832,
+        "atk": 324,
+        "defense": 0,
+        "igniteDamageScalar": "1.4846938775510206",
+        "physicalInflictionDamageScalar": "1.2423469387755102"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 97,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "114.80749000631182",
+        "agility": "155.72164948453607",
+        "intellect": "132.22680412371136",
+        "will": "107.09278350515464",
+        "hp": 5888,
+        "atk": 328,
+        "defense": 0,
+        "igniteDamageScalar": "1.489795918367347",
+        "physicalInflictionDamageScalar": "1.2448979591836735"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 98,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "115.8573532505786",
+        "agility": "157.19072164948454",
+        "intellect": "133.47422680412373",
+        "will": "108.10309278350516",
+        "hp": 5944,
+        "atk": 331,
+        "defense": 0,
+        "igniteDamageScalar": "1.4948979591836735",
+        "physicalInflictionDamageScalar": "1.2474489795918366"
+      }
+    },
+    {
+      "elite": 4,
+      "level": 99,
+      "criticalRate": 0.05,
+      "normalAttackRange": 5,
+      "attackRate": 1,
+      "attribute": {
+        "strength": "116.90721649484539",
+        "agility": "158.659793814433",
+        "intellect": "134.7216494845361",
+        "will": "109.11340206185568",
+        "hp": 6000,
+        "atk": 334,
+        "defense": 0,
+        "igniteDamageScalar": 1.5,
+        "physicalInflictionDamageScalar": 1.25
+      }
+    }
+  ]
+}
