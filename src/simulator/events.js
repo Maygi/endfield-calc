@@ -17,7 +17,7 @@ class SimEvent {
      * @param {string} sourceId 
      * @param {string} targetId 
      * @param {Object} optionalData
-     * @param {Object} tags
+     * @param {Set<string>} tags
      * @param {Object} metadata
      */
     constructor(time, priority, sourceId, targetId, optionalData, tags, metadata) {
@@ -46,7 +46,7 @@ export class HitEvent extends SimEvent {
      * @param {ELEMENT} element 
      * @param {number} stagger 
      * @param {Object} optionalData
-     * @param {Object} tags
+     * @param {Set<string>} tags
      * @param {Object} metadata
      */
     constructor(time, priority, sourceId, targetId, hitType, mv, element, stagger, optionalData, tags, metadata) {
@@ -67,7 +67,7 @@ export class InflictionEvent extends SimEvent {
      * @param {string} targetId 
      * @param {ELEMENT} element The element being inflicted
      * @param {Object} optionalData
-     * @param {Object} tags
+     * @param {Set<string>} tags
      * @param {Object} metadata
      */
     constructor(time, priority, sourceId, targetId, element, optionalData, tags, metadata) {
@@ -88,7 +88,7 @@ export class PhysicalEvent extends SimEvent {
      * @param {string} targetId 
      * @param {PHYSICAL_STATUS} type 
      * @param {Object} optionalData
-     * @param {Object} tags
+     * @param {Set<string>} tags
      * @param {Object} metadata
      */
     constructor(time, priority, sourceId, targetId, type, optionalData, tags, metadata) {
@@ -107,19 +107,17 @@ export class ApplyStatusEvent extends SimEvent {
      * @param {number} priority 
      * @param {string} sourceId 
      * @param {string} targetId 
-     * @param {string} statusId 
-     * @param {number} duration 
-     * @param {number} value 
-     * @param {BUFF_TYPE | string} type 
-     * @param {*} subtype 
-     * @param {Object} optionalData
-     * @param {Object} tags
+     * @param {string} statusName
+     * @param {string} namespace
+     * @param {Object} optionalData 
+     * @param {Set<string>} tags Do check out the STATUS_TYPE constants, will be useful.
      * @param {Object} metadata
      */
-    constructor(time, priority, sourceId, targetId, statusId, duration, value, type, subtype, optionalData, tags, metadata) {
+    constructor(time, priority, sourceId, targetId, statusName, namespace, optionalData, tags, metadata) {
         super(time, priority, sourceId, targetId, optionalData, tags, metadata);
         this.type = EVENT_TYPE.STATUS_APPLICATION;
-        this.data = { statusId, duration, value, type, subtype };
+        this.data = { statusName, namespace };
+        // fields like (base) duration or type should be left in the definition of the status
     }
 }
 
@@ -138,7 +136,7 @@ export class EndStatusEvent extends SimEvent {
      * @param {BUFF_TYPE} type 
      * @param {*} subtype 
      * @param {Object} optionalData
-     * @param {Object} tags
+     * @param {Set<string>} tags
      * @param {Object} metadata
      */
     constructor(time, priority, sourceId, targetId, statusId, isValid, type, subtype, optionalData, tags, metadata) {
@@ -159,7 +157,7 @@ export class StatusTickEvent extends SimEvent {
      * @param {string} targetId 
      * @param {string} statusId 
      * @param {Object} optionalData
-     * @param {Object} tags
+     * @param {Set<string>} tags
      * @param {Object} metadata
      */
     constructor(time, priority, sourceId, targetId, statusId, optionalData, tags, metadata) {
@@ -180,7 +178,7 @@ export class SkillEvent extends SimEvent {
      * @param {string} targetId 
      * @param {ABILITY_TYPE} type 
      * @param {Object} optionalData
-     * @param {Object} tags
+     * @param {Set<string>} tags
      * @param {Object} metadata
      */
     constructor(time, priority, sourceId, targetId, type, optionalData, tags, metadata) {
@@ -201,13 +199,16 @@ export class StateUpdateEvent extends SimEvent {
      * @param {string} targetId 
      * @param {string} property 
      * @param {number} value 
+     * @param {*} modifierType
+     * @param {*} modifierId
+     * @param {boolean} isRemoval
      * @param {Object} optionalData
-     * @param {Object} tags
+     * @param {Set<string>} tags
      * @param {Object} metadata
      */
-    constructor(time, priority, sourceId, targetId, property, value, optionalData, tags, metadata) {
+    constructor(time, priority, sourceId, targetId, property, value, modifierType, modifierId, isRemoval, optionalData, tags, metadata) {
         super(time, priority, sourceId, targetId, optionalData, tags, metadata);
         this.type = EVENT_TYPE.STATE_UPDATE;
-        this.data = { property, value };
+        this.data = { property, value, modifierType, modifierId, isRemoval };
     }
 }

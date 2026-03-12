@@ -14,18 +14,29 @@ export const PHYSICAL_STATUS = Object.freeze({
     BREACH: 'BREACH'
 });
 
-export const BUFF_TYPE = Object.freeze({
+export const STAT = Object.freeze({
     ATK: 'atk',
     DMG_BONUS: 'dmgBonus',
     DMG_TAKEN: 'dmgTaken',
     CRIT_RATE: 'critRate',
     CRIT_DMG: 'critDmg',
     SUSCEPTIBILITY: 'susceptibility',
+    FRAGILITY: 'FRAGILITY',
     DMG_AMP: 'dmgAmp',
     ARTS_INTENSITY: 'artsIntensity',
     RESISTANCE: 'resistance',
-    DEFENSE: 'defense'
+    DEFENSE: 'defense',
+    HP: 'MAX_HP',
+    ULT_ENERGY: 'ULT_ENERGY_COST',
+    STAGGER: 'MAX_STAGGER'
 });
+
+// this is a subset of the above stats, representing current values
+export const RESOURCE = Object.freeze({
+    HP: 'CURRENT_HP',
+    ULT_ENERGY: 'CURRENT_ULT_ENERGY',
+    STAGGER: 'CURRENT_STAGGER',
+})
 
 export const ATTRIBUTE = Object.freeze({
     STRENGTH: 'STRENGTH',
@@ -59,4 +70,20 @@ export const TEAM = Object.freeze({
     PLAYER: 'PLAYER',
     ENEMY: 'ENEMY',
     GLOBAL: 'GLOBAL'
+})
+
+export const STATUS_TYPE = Object.freeze({
+    STAT_MODIFIER: 'STAT_MODIFIER',
+    TIMED: 'TIMED',
+    INDEFINITE: 'INDEFINITE',
+    TICKING: 'TICKING',
+    TRIGGER: 'TRIGGER'
+})
+
+export const MODIFIER_TYPE = Object.freeze({
+    FLAT: 'FLAT',
+    PERCENTAGE: 'PERCENTAGE',
+    MIN: 'MIN',
+    MAX: 'MAX',
+    DELTA: 'DELTA'
 })

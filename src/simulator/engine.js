@@ -1,7 +1,12 @@
 import { Calculator } from "./calculation";
 import CombatState from "./combatstate";
+import { Registry } from "./registry";
 
 export default class Engine {
+    constructor(state) {
+        this.state = state;
+        this.registry = new Registry();
+    }
 
     /**
      * Runs the simulation beginning at a particular combat state, up till a specified endTime.
@@ -14,7 +19,7 @@ export default class Engine {
             const delta = event.time - state.currentTime;
 
             if (delta > 0) this.advanceTime(state, delta);
-            this.resolveEvent(state, event);
+            this.processEvent(state, event);
         }
         this.advanceTime(state, endTime - state.currentTime);
     }
@@ -39,7 +44,7 @@ export default class Engine {
      * @param {CombatState} state 
      * @param {*} event 
      */
-    static resolveEvent(state, event) {
+    static processEvent(state, event) {
 
         // TODO: read the event type and dispatch to relevant handlers. hit events, buff application, expiry, etc.
 
@@ -49,5 +54,18 @@ export default class Engine {
 
         const receipt = Calculator.calculateHit(source, target, event.data);
         // etc, broadcasting relevant informaton, logging, all that
+    }
+
+    getStat(entityId, stat) {
+        const statComponent = this.state.getComponent(entityId, 'StatComponent');
+        return statComponent?.getStat(stat);
+    }
+
+    /**
+     * Adds a event to the queue. Used by components to inject new events.
+     * @param {SimEvent} event 
+     */
+    pushEvent(event) {
+        this.eventQueue.push(event);
     }
 }

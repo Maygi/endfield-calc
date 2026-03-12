@@ -99,6 +99,21 @@ An exhaustive list of Events is given below, in no particular order, with their 
 
 ## Data
 
-Character (and in the future, enemy?) data is stored and read from the `/data` folder. This should contain every piece of information about the operator and their kit - raw stats, individual talents/potentials and their effects, abilities and their scaling, etc.
+Character (and in the future, enemy?) data is stored and read from the `data/` folder. This should contain every piece of information about the operator and their kit - raw stats, individual talents/potentials and their effects, abilities and their scaling, etc.
 
 Every character has their own character.js file, which is re-exported by the index.js registry that every other script pulls from. Reading from this database is most commonly done either at initialization of the entity, or when the AbilityComponent processes a SkillEvent. We do not keep copies in the components for memory concerns.
+
+Status effects are stored in the same place as their generating entity/mechanic. For example:
+
+- Arts Reaction debuffs are stored in `arts.js`, where all information pertinent to reactions and bursts are recorded
+- Physical Status debuffs are stored in `physical.js`, similar to above
+- If a character (or enemy) applies status effects through their skills, talents, potentials, etc. we store the status effect along with that character.
+
+Try to standardize: include relevant actions as `onApply`, `onTick`, `onExpiry`, `onRefresh`, `triggers`, etc. rather than just dumping the info in a long list of keys. All these should take as input the following four parameters to construct requisite returned events:
+
+- `state`, the CombatState at that moment
+- `instance`, a reference to the specific instance of the status effect. Instances of status effects contain a `data` field containing whatever auxiliary data is required for its function, and NOT a full copy of its definitions (use `def` below to reference this).
+- `event`, the event that triggered this function call. For example, if `onApply` is triggered, the event would be the `ApplyStatusEvent` that applied this status.
+- `def`, the reference definition of the status. This stores fixed parameters that hold constant regardless of the current combat state.
+
+This is a bit hard to understand, so please refer to the existing implementations of the Arts Reaction debuffs (Combustion, Electrification, Solidification, Corrosion) for a better idea of how all this works.
