@@ -9,7 +9,7 @@ export default class CombatState {
         /** @type {Map<string, Entity>} */
         this.entities = new Map();
 
-        /** @type {Map<string, Set<>>} */
+        /** @type {Map<string, Set<string>>} */
         this.subscriptions = new Map();
     }
 

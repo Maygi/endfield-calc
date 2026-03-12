@@ -17,6 +17,7 @@ export class StatusComponent {
         this.statusByKey = new Map();
         this.statusById = new Map();
         this.pendingExpirations = new Map();
+        this.activeSubscriptions = new Map();
     }
 
     // event handler
@@ -39,11 +40,6 @@ export class StatusComponent {
                     break;
             }
         }
-    }
-
-    // trigger listener
-    notify(event) {
-
     }
 
     applyStatus(event, statusKey) {
@@ -79,6 +75,10 @@ export class StatusComponent {
 
         if (def.onApply) {
             this.executeAndPush(def.onApply, instance, event, def);
+        }
+
+        if (def.triggers) {
+            this.#registerStatusTriggers(this.engine.state, instanceId, def.triggers);
         }
 
         this.scheduleExpiration(instance, duration);
@@ -156,7 +156,96 @@ export class StatusComponent {
         if (def?.onRemove) {
             this.executeAndPush(def.onRemove, instance, event, def);
         }
-     }
 
-    
+        if (def?.triggers) {
+            this.#unregisterStatusTriggers(this.engine.state, instance.instanceId, def.triggers);
+        }
+    }
+
+    executeAndPush(func, instance, event, def) {
+        const effects = func(this.engine.state, instance, event, def);
+        if (effects) {
+            for (const event of effects) {
+                this.engine.pushEvent(event);
+            }
+        }
+    }
+
+    notify(state, event) {
+        const subscribingInstances = this.activeSubscriptions.get(event.type);
+        if (!subscribingInstances) return;
+
+        for (const instanceId of subscribingInstances) {
+            const instance = this.statusById.get(instanceId);
+            if (!instance) continue;
+
+            const def = this.engine.registry.getStatusDefinition(instance.namespace, instance.statusName);
+            if (!def || !def.triggers || !def.triggers[event.type]) continue;
+
+            const effects = def.triggers[event.type](state, instance, event, def);
+
+            if (effects) {
+                for (const event of effects) {
+                    this.engine.pushEvent(event);
+                }
+            }
+        }
+    }
+
+    /**
+     * Private method to support subscribing statuses to triggers, and handling the component's overall subscription to the engine.
+     * @param {CombatState} state 
+     * @param {string} instanceId 
+     * @param {*} triggers 
+     */
+    #registerStatusTriggers(state, instanceId, triggers) {
+        for (const eventType of Object.keys(triggers)) {
+            if (!this.activeSubscriptions.has(eventType)) {
+                this.activeSubscriptions.set(eventType, new Set());
+                Engine.subscribe(state, eventType, this.entityId, 'StatusComponent');
+            }
+            this.activeSubscriptions.get(eventType).add(instanceId);
+        }
+    }
+
+    /**
+     * Private method to support unsubscribing statuses from triggers, and when there are no more subscribing status instances for a event type, handling the component's unsubscription from the engine.
+     * @param {CombatState} state 
+     * @param {string} instanceId 
+     * @param {*} triggers 
+     */
+    #unregisterStatusTriggers(state, instanceId, triggers) {
+        for (const eventType of Object.keys(triggers)) {
+            const subscribingInstances = this.activeSubscriptions.get(eventType);
+            if (subscribingInstances) {
+                subscribingInstances.delete(instanceId);
+
+                if (subscribingInstances.size === 0) {
+                    this.activeSubscriptions.delete(eventType);
+                    Engine.unsubscribe(state, eventType, this.entityId, 'StatusComponent');
+                }
+            }
+        }
+    }
+
+    clone() {
+        const copy = new StatusComponent(this.engine, this.entityId);
+        copy.#statusCounter = this.#statusCounter;
+        const instanceMapping = new Map();
+        for (const [id, instance] of this.statusById) {
+            const instanceClone = { ...instance };
+            copy.statusById.set(id, instanceClone);
+            instanceMapping.set(instance, instanceClone);
+        }
+        for (const [key, instance] of this.statusByKey) {
+            copy.statusByKey.set(key, instanceMapping.get(instance));
+        }
+        for (const [time, instances] of this.pendingExpirations) {
+            copy.pendingExpirations.set(time, new Set(instances));
+        }
+        for (const [eventType, instances] of this.activeSubscriptions) {
+            copy.activeSubscriptions.set(eventType, new Set(instances));
+        }
+        return copy;
+    }
 }

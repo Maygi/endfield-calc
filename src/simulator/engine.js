@@ -1,3 +1,4 @@
+import { EVENT_TYPE } from "../data/constants";
 import { Calculator } from "./calculation";
 import CombatState from "./combatstate";
 import { Registry } from "./registry";
@@ -6,6 +7,7 @@ export default class Engine {
     constructor(state) {
         this.state = state;
         this.registry = new Registry();
+        this.subscriptions = new Map();
     }
 
     /**
@@ -14,7 +16,7 @@ export default class Engine {
      * @param {*} endTime Cannot be less than the currentTime of the state.
      */
     static simulateTo(state, endTime) {
-        while(!state.eventQueue.isEmpty() && state.eventQueue.peek().time <= endTime) {
+        while (!state.eventQueue.isEmpty() && state.eventQueue.peek().time <= endTime) {
             const event = state.eventQueue.pop();
             const delta = event.time - state.currentTime;
 
@@ -46,18 +48,52 @@ export default class Engine {
      */
     static processEvent(state, event) {
 
-        // TODO: read the event type and dispatch to relevant handlers. hit events, buff application, expiry, etc.
+        switch (event.type) {
+            case EVENT_TYPE.HIT:
+                const source = state.entities.get(event.sourceId);
+                const target = state.entities.get(event.targetId);
+                if (source && target) {
+                    Calculator.calculateHit(source, target, event.data);
+                }
+                break;
+        }
 
-        // For example, to resolve a hit event we might do something like this
-        const source = state.entities.get(event.sourceId);
-        const target = state.entities.get(event.targetId);
+        this.broadcast(state, event);
+    }
 
-        const receipt = Calculator.calculateHit(source, target, event.data);
-        // etc, broadcasting relevant informaton, logging, all that
+    static broadcast(state, event) {
+        const subscribers = state.subscriptions.get(event.type);
+        if (!subscribers) return;
+
+        for (const address of subscribers) {
+            const [entityId, componentType] = address.split(':');
+            const entity = state.entities.get(entityId);
+            const component = entity?.components.get(componentType);
+
+            if (component?.notify) {
+                component.notify(state, event);
+            }
+        }
+    }
+
+    static subscribe(state, eventType, entityId, componentType) {
+        if (!state.subscriptions.has(eventType)) {
+            state.subscriptions.set(eventType, new Set());
+        }
+        const address = `${entityId}:${componentType}`;
+        state.subscriptions.get(eventType).add(address);
+    }
+
+    static unsubscribe(state, eventType, entityId, componentType) {
+        const subscribers = state.subscriptions.get(eventType);
+        if (subscribers) {
+            subscribers.delete(`${entityId}:${componentType}`);
+        }
     }
 
     getStat(entityId, stat) {
-        const statComponent = this.state.getComponent(entityId, 'StatComponent');
+        const entity = this.state.entities.get(entityId);
+        const statComponent = entity?.components.get('Stats');
         return statComponent?.getStat(stat);
     }
 
