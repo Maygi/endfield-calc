@@ -107,16 +107,16 @@ export class ApplyStatusEvent extends SimEvent {
      * @param {number} priority 
      * @param {string} sourceId 
      * @param {string} targetId 
-     * @param {string} statusName
      * @param {string} namespace
+     * @param {string} statusName
      * @param {Object} optionalData 
      * @param {Set<string>} tags Do check out the STATUS_TYPE constants, will be useful.
      * @param {Object} metadata
      */
-    constructor(time, priority, sourceId, targetId, statusName, namespace, optionalData, tags, metadata) {
+    constructor(time, priority, sourceId, targetId, namespace, statusName, optionalData, tags, metadata) {
         super(time, priority, sourceId, targetId, optionalData, tags, metadata);
         this.type = EVENT_TYPE.STATUS_APPLICATION;
-        this.data = { statusName, namespace };
+        this.data = { namespace, statusName };
         // fields like (base) duration or type should be left in the definition of the status
     }
 }
@@ -132,17 +132,15 @@ export class EndStatusEvent extends SimEvent {
      * @param {string} sourceId 
      * @param {string} targetId 
      * @param {string} statusId 
-     * @param {boolean} isValid The StatusComponent may use this to invalidate certain packets (e.g. if an effect is purged or extended)
-     * @param {BUFF_TYPE} type 
-     * @param {*} subtype 
+     * @param {boolean} isValid The StatusComponent uses this to invalidate certain packets (e.g. if an effect is purged or extended)
      * @param {Object} optionalData
      * @param {Set<string>} tags
      * @param {Object} metadata
      */
-    constructor(time, priority, sourceId, targetId, statusId, isValid, type, subtype, optionalData, tags, metadata) {
+    constructor(time, priority, sourceId, targetId, statusId, isValid, optionalData, tags, metadata) {
         super(time, priority, sourceId, targetId, optionalData, tags, metadata);
         this.type = EVENT_TYPE.STATUS_EXPIRATION;
-        this.data = { isValid, type, subtype };
+        this.data = { statusId, isValid };
     }
 }
 

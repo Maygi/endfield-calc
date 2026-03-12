@@ -1,24 +1,23 @@
 import { BURST, REACTIONS } from "../data/arts.js";
-import { ELEMENT } from "../data/constants.js";
+import { ELEMENT, EVENT_TYPE } from "../data/constants.js";
 import CombatState from "../simulator/combatstate";
+import { ApplyStatusEvent, HitEvent } from "../simulator/events.js";
 
 export default class InflictionComponent {
-    /**
-     * 
-     * @param {ELEMENT} element 
-     * @param {number} stacks 
-     */
-    constructor(element = null, stacks = 0) {
-        this.currentElement = null;
-        this.stacks = 0;
+    constructor(engine, entityId, element = null, stacks = 0) {
+        this.engine = engine;
+        this.entityId = entityId;
+        this.currentElement = element;
+        this.stacks = stacks;
     }
 
-    /**
-     * 
-     * @param {ELEMENT} element 
-     * @param {CombatState} state 
-     */
-    applyElement(element, state) {
+    notify(state, event) {
+        if (event.type === EVENT_TYPE.ARTS_INFLICTION && event.targetId === this.entityId) {
+            this.applyElement(event.data.element, state, event);
+        }
+    }
+
+    applyElement(element, state, event) {
         // if target has no current element
         if (!this.currentElement) {
             this.currentElement = element;
@@ -28,11 +27,11 @@ export default class InflictionComponent {
 
         // arts burst
         if (this.currentElement === element) {
-            this.triggerBurst(state, element, this.stacks, BURST); // TODO: figure out what data exactly to put in BURST and what needs to be passed
+            this.triggerBurst(state, event, element, this.stacks);
             this.stacks = Math.min(this.stacks + 1, 4);
         } else {
-            const reaction = REACTIONS[element];
-            this.triggerReaction(state, this.stacks, reaction);
+            // arts reaction
+            this.triggerReaction(state, event, element, this.stacks);
             this.clearAll();
         }
     }
@@ -46,24 +45,61 @@ export default class InflictionComponent {
     }
 
     /**
-     * Generates the relevant damage event packets from Burst triggers.
-     * @param {CombatState} state 
-     * @param {ELEMENT} element 
-     * @param {number} stacks 
-     * @param {*} data 
-     * @returns 
+     * Generates the HitEvent from Burst triggers.
      */
-    triggerBurst(state, element, stacks, data) {
+    triggerBurst(state, event, element, stacks) {
+        const burstEvent = new HitEvent(
+            event.timeStamp,
+            event.priority,
+            event.sourceId,
+            this.entityId,
+            BURST.type,
+            BURST.mv,
+            element,
+            BURST.stagger
+        );
 
+        this.engine.pushEvent(burstEvent);
     }
 
     /**
-     * 
-     * @param {CombatState} state 
-     * @param {number} stacks 
-     * @param {*} data 
+     * Generates the initial HitEvent and applies the corresponding debuff
      */
-    triggerReaction(state, stacks, data) {
+    triggerReaction(state, event, element, stacks) {
+        const reaction = REACTIONS.debuff[element];
+        if (!reaction) {
+            console.warn(`Missing reaction definition for element: ${element}`);
+            return;
+        }
 
+        const level = stacks - 1;
+        const initialMV = REACTIONS.initialDmg.mv[level];
+
+        const initialDamage = new HitEvent(
+            event.time,
+            event.priority,
+            event.sourceId,
+            this.entityId,
+            reaction.name,
+            initialMV,
+            element,
+            REACTIONS.initialDmg.stagger
+        );
+        this.engine.pushEvent(initialDamage);
+
+        const applyDebuff = new ApplyStatusEvent(
+            event.time,
+            event.priority,
+            event.sourceId,
+            this.entityId,
+            'ARTS',
+            reaction.name,
+            { level }
+        );
+        this.engine.pushEvent(applyDebuff);
+    }
+
+    clone() {
+        return new InflictionComponent(this.engine, this.entityId, this.currentElement, this.stacks);
     }
 }

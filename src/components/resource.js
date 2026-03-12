@@ -63,7 +63,7 @@ export class ResourceComponent {
                 this.isStaggered = true;
 
                 this.engine.pushEvent(
-                    new ApplyStatusEvent(event.time, 0, event.sourceId, this.entityId, 'STAGGER', 'SYSTEM')
+                    new ApplyStatusEvent(event.time, 0, event.sourceId, this.entityId, 'SYSTEM', 'STAGGER')
                 );
             }
         }

@@ -67,7 +67,7 @@ export const REACTIONS = {
         [ELEMENT.ELECTRIC]: {
             name: 'ELECTRIFICATION',
             duration: [12, 18, 24, 30],
-            statModified: STAT.FRAGILITY,
+            statModified: STAT.DMG_TAKEN,
             values: [0.12, 0.16, 0.2, 0.24],
 
             onApply: (state, instance, event, def) => {
