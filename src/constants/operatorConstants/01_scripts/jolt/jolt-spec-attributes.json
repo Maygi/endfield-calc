@@ -1,0 +1,44 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "attributes": {
+        "*": {
+          "breakStage": "attributes[&1].elite",
+          "Attribute": {
+            "attrs": {
+              "*": {
+                "attrValue": "attributes[&4].tmp.@(1,attrType)"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "attributes": {
+        "*": {
+          "elite": "attributes[&1].elite",
+          "tmp": {
+            "Level": "attributes[&2].level",
+            "CriticalRate": "attributes[&2].criticalRate",
+            "NormalAttackRange": "attributes[&2].normalAttackRange",
+            "AttackRate": "attributes[&2].attackRate",
+            "Str": "attributes[&2].attribute.strength",
+            "Agi": "attributes[&2].attribute.agility",
+            "Wisd": "attributes[&2].attribute.intellect",
+            "Will": "attributes[&2].attribute.will",
+            "MaxHp": "attributes[&2].attribute.hp",
+            "Atk": "attributes[&2].attribute.atk",
+            "Def": "attributes[&2].attribute.defense",
+            "IgniteDamageScalar": "attributes[&2].attribute.igniteDamageScalar",
+            "PhysicalInflictionDamageScalar": "attributes[&2].attribute.physicalInflictionDamageScalar"
+          }
+        }
+      }
+    }
+  }
+]
