@@ -32,6 +32,9 @@ export default class Engine {
     simulateTo(state, endTime) {
         while (!state.eventQueue.isEmpty() && state.eventQueue.peek().time <= endTime) {
             const event = state.eventQueue.pop();
+
+            if (event.type === EVENT_TYPE.STATUS_EXPIRATION && !event.isValid) continue;
+
             const delta = event.time - state.currentTime;
 
             if (delta > 0) this.advanceTime(state, delta);

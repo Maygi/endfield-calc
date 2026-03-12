@@ -11,7 +11,7 @@ export class TriggerComponent {
         for (const trigger of this.triggers) {
             // each passive might have several triggering conditions
             for (const eventType of trigger.eventTypes) {
-                Engine.subscribe(state, eventType, this.entityId, 'TriggerComponent');
+                this.engine.subscribe(state, eventType, this.entityId, 'TriggerComponent');
             }
         }
     }

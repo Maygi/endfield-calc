@@ -52,6 +52,9 @@ export class StatusComponent {
             duration = def.duration;
         } else if (def.durationArr) { // supports an array of durations too. in this case, define a status 'level' in optional data, 1-indexed.
             duration = def.durationArr[event.optionalData.level - 1];
+        } else {
+            // then assume the application event is the one that passes duration, in optionalData
+            duration = event.optionalData.duration;
         }
 
         const instanceId = `${this.entityId}_status_${this.#statusCounter++}`;
@@ -202,7 +205,7 @@ export class StatusComponent {
         for (const eventType of Object.keys(triggers)) {
             if (!this.activeSubscriptions.has(eventType)) {
                 this.activeSubscriptions.set(eventType, new Set());
-                Engine.subscribe(state, eventType, this.entityId, 'StatusComponent');
+                this.engine.subscribe(state, eventType, this.entityId, 'StatusComponent');
             }
             this.activeSubscriptions.get(eventType).add(instanceId);
         }
@@ -222,7 +225,7 @@ export class StatusComponent {
 
                 if (subscribingInstances.size === 0) {
                     this.activeSubscriptions.delete(eventType);
-                    Engine.unsubscribe(state, eventType, this.entityId, 'StatusComponent');
+                    this.engine.unsubscribe(state, eventType, this.entityId, 'StatusComponent');
                 }
             }
         }
